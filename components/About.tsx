@@ -13,9 +13,9 @@ const facts = [
 
 export function About() {
   return (
-    <section id="about" className="relative scroll-mt-24 py-24 sm:py-32">
+    <section id="about" className="relative scroll-mt-24 py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-content px-5 sm:px-8">
-        <div className="grid gap-14 lg:grid-cols-12 lg:items-center">
+        <div className="grid gap-10 sm:gap-14 lg:grid-cols-12 lg:items-center">
           {/* Text */}
           <div className="lg:col-span-7">
             <Reveal>
@@ -59,7 +59,7 @@ export function About() {
           {/* Signature card */}
           <div className="lg:col-span-5">
             <Reveal delay={0.1}>
-              <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.02] p-8 shadow-glass">
+              <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6 shadow-glass sm:p-8">
                 <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(198,161,91,0.18),transparent_60%)] blur-2xl" />
                 <span className="block font-display text-6xl italic tracking-[0.12em] text-gradient-gold">
                   BNSH

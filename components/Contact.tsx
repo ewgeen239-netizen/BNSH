@@ -29,12 +29,12 @@ const channels = [
 
 export function Contact() {
   return (
-    <section id="contact" className="relative scroll-mt-24 border-t border-white/[0.05] py-24 sm:py-32">
+    <section id="contact" className="relative scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24 lg:py-32">
       {/* soft glow */}
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-80 bg-radial-fade" aria-hidden="true" />
 
       <div className="mx-auto max-w-content px-5 sm:px-8">
-        <div className="grid gap-14 lg:grid-cols-12">
+        <div className="grid gap-10 sm:gap-14 lg:grid-cols-12">
           {/* Left: pitch + channels */}
           <div className="lg:col-span-5">
             <Reveal>

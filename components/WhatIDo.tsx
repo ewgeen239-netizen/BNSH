@@ -7,7 +7,7 @@ import { services } from '@/lib/content';
 
 export function WhatIDo() {
   return (
-    <section id="services" className="relative scroll-mt-24 border-t border-white/[0.05] py-24 sm:py-32">
+    <section id="services" className="relative scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-content px-5 sm:px-8">
         <SectionHeading
           overline="What I Do"

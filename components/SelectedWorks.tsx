@@ -19,7 +19,7 @@ export function SelectedWorks() {
   );
 
   return (
-    <section id="works" className="relative scroll-mt-24 py-24 sm:py-32">
+    <section id="works" className="relative scroll-mt-24 py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-content px-5 sm:px-8">
         <SectionHeading
           overline="Selected Works"
