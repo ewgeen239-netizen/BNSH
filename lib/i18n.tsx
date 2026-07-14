@@ -33,6 +33,7 @@ type UIDict = {
     description: string;
     ctaWorks: string;
     ctaDiscuss: string;
+    quickJump: string;
     trust: [string, string][];
     scroll: string;
   };
@@ -61,7 +62,7 @@ type UIDict = {
 
 const ui: Record<Locale, UIDict> = {
   ru: {
-    madeBy: 'Этот сайт я спроектировал и собрал сам',
+    madeBy: 'Личная страница — часть моего портфолио',
     nav: { works: 'Работы', services: 'Услуги', about: 'Обо мне', pricing: 'Прайс', process: 'Процесс', contact: 'Контакты' },
     common: { discuss: 'Обсудить проект', details: 'Подробнее', live: 'Live', toTop: 'Наверх', writeTelegram: 'Написать в Telegram' },
     hero: {
@@ -72,6 +73,7 @@ const ui: Record<Locale, UIDict> = {
         'Проектирую и разрабатываю сайты и цифровые продукты, которые выглядят дорого и работают на результат. Ниже — мои работы, форматы сотрудничества и способ связаться.',
       ctaWorks: 'Смотреть работы',
       ctaDiscuss: 'Обсудить проект',
+      quickJump: 'Быстрый переход',
       trust: [['Сайты', 'под бизнес'], ['Лендинги', 'под заявки'], ['Веб-приложения', 'и интерфейсы']],
       scroll: 'Ниже',
     },
@@ -102,7 +104,7 @@ const ui: Record<Locale, UIDict> = {
   },
 
   en: {
-    madeBy: 'I designed and built this site myself',
+    madeBy: 'Personal page — part of my portfolio',
     nav: { works: 'Work', services: 'Services', about: 'About', pricing: 'Pricing', process: 'Process', contact: 'Contact' },
     common: { discuss: 'Discuss a project', details: 'View', live: 'Live', toTop: 'To top', writeTelegram: 'Message on Telegram' },
     hero: {
@@ -113,6 +115,7 @@ const ui: Record<Locale, UIDict> = {
         'I design and build websites and digital products that look premium and drive results. Below: my work, ways to collaborate, and how to reach me.',
       ctaWorks: 'View work',
       ctaDiscuss: 'Discuss a project',
+      quickJump: 'Quick jump',
       trust: [['Websites', 'for business'], ['Landing pages', 'for leads'], ['Web apps', 'and interfaces']],
       scroll: 'Scroll',
     },
@@ -143,7 +146,7 @@ const ui: Record<Locale, UIDict> = {
   },
 
   pl: {
-    madeBy: 'Tę stronę zaprojektowałem i zbudowałem sam',
+    madeBy: 'Strona osobista — część mojego portfolio',
     nav: { works: 'Prace', services: 'Usługi', about: 'O mnie', pricing: 'Cennik', process: 'Proces', contact: 'Kontakt' },
     common: { discuss: 'Omów projekt', details: 'Zobacz', live: 'Live', toTop: 'Do góry', writeTelegram: 'Napisz na Telegramie' },
     hero: {
@@ -154,6 +157,7 @@ const ui: Record<Locale, UIDict> = {
         'Projektuję i buduję strony oraz produkty cyfrowe, które wyglądają premium i działają na wynik. Poniżej: moje prace, formy współpracy i sposób kontaktu.',
       ctaWorks: 'Zobacz prace',
       ctaDiscuss: 'Omów projekt',
+      quickJump: 'Szybkie przejście',
       trust: [['Strony', 'dla biznesu'], ['Landing page', 'pod zapytania'], ['Aplikacje web', 'i interfejsy']],
       scroll: 'Niżej',
     },

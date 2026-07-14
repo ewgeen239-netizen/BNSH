@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
 import { validateContactForm } from '@/lib/validation';
 
 export const runtime = 'nodejs';
@@ -87,31 +88,24 @@ export async function POST(req: Request) {
     }
   }
 
-  // Optional: also deliver via Resend if configured. Falls back gracefully.
+  // Email delivery via Resend if configured. Falls back gracefully.
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO;
   const from = process.env.CONTACT_FROM ?? 'BNSH Studio <onboarding@resend.dev>';
 
   if (apiKey && to) {
     try {
-      const res = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from,
-          to: [to],
-          reply_to: contact.includes('@') ? contact : undefined,
-          subject: `Новая заявка · ${name} (${lead.type})`,
-          text: `Имя: ${name}\nКонтакт: ${contact}\nТип: ${lead.type}\n\n${lead.message}\n\n${lead.at}`,
-        }),
+      const resend = new Resend(apiKey);
+      const { error } = await resend.emails.send({
+        from,
+        to: [to],
+        replyTo: contact.includes('@') ? contact : undefined,
+        subject: `Новая заявка · ${name} (${lead.type})`,
+        text: `Имя: ${name}\nКонтакт: ${contact}\nТип: ${lead.type}\n\n${lead.message}\n\n${lead.at}`,
       });
-
-      if (!res.ok) {
-        console.error('[BNSH contact] Resend failed:', await res.text());
-        // Lead is logged — treat as soft success so the user isn't blocked.
+      if (error) {
+        // Lead is already logged — treat as soft success so the user isn't blocked.
+        console.error('[BNSH contact] Resend failed:', error);
       }
     } catch (err) {
       console.error('[BNSH contact] Resend error:', err);

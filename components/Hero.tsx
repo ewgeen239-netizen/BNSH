@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion
 import { ArrowRight, ArrowDown, BadgeCheck } from 'lucide-react';
 import { AuroraBackground } from './AuroraBackground';
 import { BrandEmblem } from './BrandEmblem';
-import { scrollToId } from '@/lib/utils';
+import { scrollToId, cn } from '@/lib/utils';
 import { useT } from '@/lib/i18n';
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -102,6 +102,35 @@ export function Hero() {
               >
                 {t.hero.ctaDiscuss}
               </button>
+            </motion.div>
+
+            {/* quick-jump ribbon — one-click down to any section */}
+            <motion.div {...rev(0.33)} className="mt-5 flex items-center gap-3">
+              <span className="hidden shrink-0 items-center gap-1.5 text-[11px] uppercase tracking-overline text-faint sm:inline-flex">
+                <ArrowDown className="h-3.5 w-3.5" strokeWidth={1.5} />
+                {t.hero.quickJump}
+              </span>
+              <div className="-mx-5 flex gap-2 overflow-x-auto px-5 [scrollbar-width:none] sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden">
+                {[
+                  { id: 'pricing', label: t.nav.pricing, primary: true },
+                  { id: 'works', label: t.nav.works },
+                  { id: 'process', label: t.nav.process },
+                  { id: 'contact', label: t.nav.contact },
+                ].map((c) => (
+                  <button
+                    key={c.id}
+                    onClick={() => scrollToId(c.id)}
+                    className={cn(
+                      'shrink-0 rounded-full border px-3.5 py-1.5 text-xs font-medium transition focus-ring',
+                      c.primary
+                        ? 'border-gold/40 bg-gold/[0.08] text-gold-soft hover:bg-gold/[0.14]'
+                        : 'border-white/10 bg-white/[0.03] text-silver/80 hover:border-white/20 hover:text-platinum',
+                    )}
+                  >
+                    {c.label}
+                  </button>
+                ))}
+              </div>
             </motion.div>
 
             {/* trust strip */}
