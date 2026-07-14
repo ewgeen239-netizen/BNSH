@@ -6,7 +6,7 @@
 export const siteConfig = {
   name: 'BNSH Studio',
   brand: 'BNSH',
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bnsh.studio',
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bnsh.space',
   locale: 'ru_RU',
 
   title: 'BNSH Studio — премиальные сайты и веб-приложения',
