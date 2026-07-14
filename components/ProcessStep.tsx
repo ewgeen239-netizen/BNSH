@@ -5,7 +5,7 @@ import type { Step } from '@/lib/content';
 
 export function ProcessStep({ step, last }: { step: Step; last?: boolean }) {
   return (
-    <RevealItem className="relative flex gap-5 pb-10 last:pb-0">
+    <RevealItem className="relative flex gap-4 pb-6 last:pb-0 sm:gap-5 sm:pb-8">
       {/* connector line */}
       {!last && (
         <span

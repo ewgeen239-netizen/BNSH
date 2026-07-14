@@ -9,7 +9,7 @@ export function PricingCard({ plan }: { plan: Plan }) {
   return (
     <RevealItem
       className={cn(
-        'relative flex flex-col overflow-hidden rounded-3xl border p-8 transition-all duration-500 ease-premium hover:-translate-y-1',
+        'relative flex flex-col overflow-hidden rounded-3xl border p-6 transition-all duration-500 ease-premium hover:-translate-y-1 sm:p-8',
         plan.featured
           ? 'border-gold/30 bg-gradient-to-b from-white/[0.06] to-white/[0.02] shadow-gold'
           : 'border-white/[0.08] bg-white/[0.02] shadow-glass hover:border-white/[0.16]',
@@ -25,11 +25,11 @@ export function PricingCard({ plan }: { plan: Plan }) {
       )}
 
       <h3 className="text-lg font-semibold text-platinum">{plan.name}</h3>
-      <p className="mt-2 min-h-[2.5rem] text-sm leading-relaxed text-silver/70">
+      <p className="mt-2 text-sm leading-relaxed text-silver/70 sm:min-h-[2.5rem]">
         {plan.audience}
       </p>
 
-      <div className="mt-6 flex items-baseline gap-2">
+      <div className="mt-4 flex items-baseline gap-2 sm:mt-6">
         <span
           className={cn(
             'text-3xl font-semibold tracking-tight',
@@ -41,7 +41,7 @@ export function PricingCard({ plan }: { plan: Plan }) {
         <span className="text-xs text-faint">{plan.priceNote}</span>
       </div>
 
-      <ul className="mt-7 space-y-3">
+      <ul className="mt-5 space-y-2.5 sm:mt-7 sm:space-y-3">
         {plan.features.map((f) => (
           <li key={f} className="flex items-start gap-3 text-sm text-silver/85">
             <span
@@ -60,7 +60,7 @@ export function PricingCard({ plan }: { plan: Plan }) {
       <button
         onClick={() => scrollToId('contact')}
         className={cn(
-          'mt-8 w-full rounded-full px-5 py-3 text-sm font-semibold transition focus-ring',
+          'mt-6 w-full rounded-full px-5 py-3 text-sm font-semibold transition focus-ring sm:mt-8',
           plan.featured
             ? 'bg-platinum text-ink-950 hover:bg-white'
             : 'border border-white/12 bg-white/[0.03] text-platinum hover:border-gold/40 hover:bg-white/[0.06]',

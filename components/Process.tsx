@@ -7,7 +7,7 @@ import { steps } from '@/lib/content';
 
 export function Process() {
   return (
-    <section id="process" className="relative scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24 lg:py-32">
+    <section id="process" className="relative scroll-mt-24 border-t border-white/[0.05] py-12 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-content px-5 sm:px-8">
         <div className="grid gap-10 sm:gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">

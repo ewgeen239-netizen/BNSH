@@ -7,7 +7,7 @@ import { advantages } from '@/lib/content';
 
 export function Advantages() {
   return (
-    <section className="relative scroll-mt-24 py-16 sm:py-24 lg:py-32">
+    <section className="relative scroll-mt-24 py-12 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-content px-5 sm:px-8">
         <SectionHeading
           overline="Advantages"

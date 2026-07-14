@@ -13,7 +13,7 @@ const facts = [
 
 export function About() {
   return (
-    <section id="about" className="relative scroll-mt-24 py-16 sm:py-24 lg:py-32">
+    <section id="about" className="relative scroll-mt-24 py-12 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-content px-5 sm:px-8">
         <div className="grid gap-10 sm:gap-14 lg:grid-cols-12 lg:items-center">
           {/* Text */}

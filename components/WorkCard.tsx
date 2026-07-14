@@ -12,7 +12,7 @@ export function WorkCard({ work }: { work: Work }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 12 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative flex flex-col overflow-hidden rounded-3xl border border-white/[0.07] bg-white/[0.02] shadow-glass transition-all duration-500 ease-premium hover:-translate-y-1 hover:border-white/[0.14] hover:shadow-glass-hover"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] shadow-glass transition-all duration-500 ease-premium hover:-translate-y-1 hover:border-white/[0.14] hover:shadow-glass-hover sm:rounded-3xl"
     >
       {/* Showcase visual (placeholder). Swap for a real screenshot: put an
           <Image/> here and remove the gradient block. */}
@@ -24,47 +24,49 @@ export function WorkCard({ work }: { work: Work }) {
           }}
         />
         {/* faux window chrome for a product-shot feel */}
-        <div className="absolute inset-x-5 top-5 flex items-center gap-1.5 opacity-70">
-          <span className="h-2 w-2 rounded-full bg-white/20" />
-          <span className="h-2 w-2 rounded-full bg-white/20" />
-          <span className="h-2 w-2 rounded-full bg-white/20" />
+        <div className="absolute inset-x-4 top-4 flex items-center gap-1.5 opacity-70 sm:inset-x-5 sm:top-5">
+          <span className="h-1.5 w-1.5 rounded-full bg-white/20 sm:h-2 sm:w-2" />
+          <span className="h-1.5 w-1.5 rounded-full bg-white/20 sm:h-2 sm:w-2" />
+          <span className="h-1.5 w-1.5 rounded-full bg-white/20 sm:h-2 sm:w-2" />
         </div>
-        <div className="absolute inset-x-5 bottom-5 space-y-2">
-          <div className="h-2 w-2/3 rounded-full bg-white/15" />
-          <div className="h-2 w-1/2 rounded-full bg-white/10" />
+        <div className="absolute inset-x-4 bottom-4 space-y-1.5 sm:inset-x-5 sm:bottom-5 sm:space-y-2">
+          <div className="h-1.5 w-2/3 rounded-full bg-white/15 sm:h-2" />
+          <div className="h-1.5 w-1/2 rounded-full bg-white/10 sm:h-2" />
         </div>
         {/* grain + sheen */}
         <div className="grain absolute inset-0 opacity-[0.06]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(5,5,5,0.6),transparent_45%)]" />
       </div>
 
-      <div className="flex flex-1 flex-col p-6">
-        <div className="flex items-center justify-between gap-3">
-          <span className="text-[11px] font-medium uppercase tracking-overline text-gold-soft/80">
+      <div className="flex flex-1 flex-col p-4 sm:p-6">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-[10px] font-medium uppercase tracking-overline text-gold-soft/80 sm:text-[11px]">
             {work.type}
           </span>
-          <span className="text-xs text-faint">{work.year}</span>
+          <span className="text-[11px] text-faint sm:text-xs">{work.year}</span>
         </div>
 
-        <h3 className="mt-3 text-xl font-semibold text-platinum">{work.title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-silver/75">{work.description}</p>
+        <h3 className="mt-2 text-base font-semibold text-platinum sm:mt-3 sm:text-xl">{work.title}</h3>
+        <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-silver/75 sm:mt-2 sm:line-clamp-none sm:text-sm">
+          {work.description}
+        </p>
 
-        <div className="mt-5 flex flex-wrap gap-1.5">
+        <div className="mt-3 flex flex-wrap gap-1.5 sm:mt-5">
           {work.stack.map((s) => (
             <span
               key={s}
-              className="rounded-full border border-white/[0.08] bg-white/[0.02] px-2.5 py-1 text-[11px] text-muted"
+              className="rounded-full border border-white/[0.08] bg-white/[0.02] px-2 py-0.5 text-[10px] text-muted sm:px-2.5 sm:py-1 sm:text-[11px]"
             >
               {s}
             </span>
           ))}
         </div>
 
-        <div className="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4">
-          <span className="text-sm font-medium text-silver transition-colors group-hover:text-platinum">
+        <div className="mt-4 flex items-center justify-between border-t border-white/[0.06] pt-3 sm:mt-6 sm:pt-4">
+          <span className="text-xs font-medium text-silver transition-colors group-hover:text-platinum sm:text-sm">
             Подробнее
           </span>
-          <span className="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-silver transition-all duration-300 group-hover:border-gold/50 group-hover:bg-gold/10 group-hover:text-gold-soft">
+          <span className="grid h-8 w-8 place-items-center rounded-full border border-white/10 text-silver transition-all duration-300 group-hover:border-gold/50 group-hover:bg-gold/10 group-hover:text-gold-soft sm:h-9 sm:w-9">
             <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" strokeWidth={1.75} />
           </span>
         </div>

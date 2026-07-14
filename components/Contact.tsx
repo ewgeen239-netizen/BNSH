@@ -29,7 +29,7 @@ const channels = [
 
 export function Contact() {
   return (
-    <section id="contact" className="relative scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24 lg:py-32">
+    <section id="contact" className="relative scroll-mt-24 border-t border-white/[0.05] py-12 sm:py-20 lg:py-28">
       {/* soft glow */}
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-80 bg-radial-fade" aria-hidden="true" />
 
