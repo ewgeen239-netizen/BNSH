@@ -5,17 +5,21 @@ import { AnimatePresence, LayoutGroup } from 'framer-motion';
 import { SectionHeading } from './SectionHeading';
 import { Reveal } from './Reveal';
 import { WorkCard } from './WorkCard';
-import { works, workFilters, type WorkCategory } from '@/lib/content';
+import { workFilters, type WorkCategory } from '@/lib/content';
+import { useLang, useT, getWorks } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 
 type Filter = 'all' | WorkCategory;
 
 export function SelectedWorks() {
+  const { locale } = useLang();
+  const t = useT();
   const [filter, setFilter] = useState<Filter>('all');
 
+  const works = useMemo(() => getWorks(locale), [locale]);
   const filtered = useMemo(
     () => (filter === 'all' ? works : works.filter((w) => w.category === filter)),
-    [filter],
+    [filter, works],
   );
 
   return (
@@ -23,8 +27,8 @@ export function SelectedWorks() {
       <div className="mx-auto max-w-content px-5 sm:px-8">
         <SectionHeading
           overline="Selected Works"
-          title="Мои работы"
-          intro="Подборка сайтов и приложений. Каждый проект — отдельная задача бизнеса и аккуратно собранное решение под неё."
+          title={t.works.title}
+          intro={t.works.intro}
         />
 
         {/* filters */}
@@ -44,7 +48,7 @@ export function SelectedWorks() {
                   )}
                   aria-pressed={active}
                 >
-                  {f.label}
+                  {f.id === 'all' ? t.works.filterAll : f.label}
                 </button>
               );
             })}

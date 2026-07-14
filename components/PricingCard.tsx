@@ -3,9 +3,11 @@
 import { Check } from 'lucide-react';
 import { RevealItem } from './Reveal';
 import { scrollToId, cn } from '@/lib/utils';
+import { useT } from '@/lib/i18n';
 import type { Plan } from '@/lib/content';
 
 export function PricingCard({ plan }: { plan: Plan }) {
+  const t = useT();
   return (
     <RevealItem
       className={cn(
@@ -19,7 +21,7 @@ export function PricingCard({ plan }: { plan: Plan }) {
         <>
           <div className="absolute -right-20 -top-20 h-52 w-52 rounded-full bg-[radial-gradient(circle,rgba(198,161,91,0.22),transparent_60%)] blur-2xl" />
           <span className="absolute right-6 top-6 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-gold-soft">
-            Популярно
+            {t.pricing.popular}
           </span>
         </>
       )}
@@ -66,7 +68,7 @@ export function PricingCard({ plan }: { plan: Plan }) {
             : 'border border-white/12 bg-white/[0.03] text-platinum hover:border-gold/40 hover:bg-white/[0.06]',
         )}
       >
-        Обсудить проект
+        {t.common.discuss}
       </button>
     </RevealItem>
   );

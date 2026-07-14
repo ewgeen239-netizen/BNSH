@@ -5,6 +5,7 @@ import { Reveal } from './Reveal';
 import { Overline } from './SectionHeading';
 import { ContactForm } from './ContactForm';
 import { siteConfig } from '@/lib/site';
+import { useT } from '@/lib/i18n';
 
 const channels = [
   {
@@ -28,6 +29,7 @@ const channels = [
 ];
 
 export function Contact() {
+  const t = useT();
   return (
     <section id="contact" className="relative scroll-mt-24 border-t border-white/[0.05] py-12 sm:py-20 lg:py-28">
       {/* soft glow */}
@@ -42,13 +44,12 @@ export function Contact() {
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-5 text-display-md font-semibold text-platinum">
-                Расскажите о проекте — я предложу лучший формат сайта.
+                {t.contact.title}
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-5 max-w-md text-base leading-relaxed text-silver/75">
-                Опишите задачу в двух словах. Отвечу, задам пару вопросов и предложу
-                подходящий формат, сроки и смету.
+                {t.contact.intro}
               </p>
             </Reveal>
 

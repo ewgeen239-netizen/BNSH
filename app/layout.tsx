@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Instrument_Serif } from 'next/font/google';
 import { siteConfig } from '@/lib/site';
+import { LanguageProvider } from '@/lib/i18n';
 import './globals.css';
 
 const sans = Inter({
@@ -100,7 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" className={`${sans.variable} ${display.variable}`}>
       <body>
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

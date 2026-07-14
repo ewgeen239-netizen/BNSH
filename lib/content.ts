@@ -45,9 +45,49 @@ export type Work = {
   // real screenshots by dropping images in /public and swapping the visual.
   accent: [string, string];
   href?: string;
+  live?: boolean; // real, published project (vs template placeholder)
 };
 
 export const works: Work[] = [
+  {
+    slug: 'balance',
+    title: 'Balance',
+    type: 'Сайт бренда напитков',
+    category: 'websites',
+    year: '2025',
+    description:
+      'Сайт бренда коктейлей: атмосферный визуал, подача продукта и аккуратная типографика.',
+    stack: ['Next.js', 'Tailwind', 'Motion'],
+    accent: ['#16241c', '#7FB069'],
+    href: 'https://balancecocktails.vercel.app',
+    live: true,
+  },
+  {
+    slug: 'autodoc',
+    title: 'Tracker AutoDoc',
+    type: 'Telegram-бот',
+    category: 'apps',
+    year: '2025',
+    description:
+      'Telegram-бот для учёта и трекинга документов — заявки и статусы прямо в чате.',
+    stack: ['Telegram Bot API', 'Node.js'],
+    accent: ['#12233a', '#5B8DEF'],
+    href: 'https://t.me/AutDdoc_bot',
+    live: true,
+  },
+  {
+    slug: 'krasnovska',
+    title: 'Krasnovska',
+    type: 'Персональный бренд',
+    category: 'websites',
+    year: '2025',
+    description:
+      'Сайт личного бренда: чистая типографика, портфолио и понятная презентация услуг.',
+    stack: ['Next.js', 'i18n', 'Tailwind'],
+    accent: ['#241420', '#E08CB0'],
+    href: 'https://krasnovska.vercel.app/ru',
+    live: true,
+  },
   {
     slug: 'aurora-clinic',
     title: 'Aurora Clinic',

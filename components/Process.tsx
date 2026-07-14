@@ -3,9 +3,12 @@
 import { SectionHeading } from './SectionHeading';
 import { RevealGroup } from './Reveal';
 import { ProcessStep } from './ProcessStep';
-import { steps } from '@/lib/content';
+import { useLang, useT, getSteps } from '@/lib/i18n';
 
 export function Process() {
+  const { locale } = useLang();
+  const t = useT();
+  const steps = getSteps(locale);
   return (
     <section id="process" className="relative scroll-mt-24 border-t border-white/[0.05] py-12 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-content px-5 sm:px-8">
@@ -14,8 +17,8 @@ export function Process() {
             <div className="lg:sticky lg:top-28">
               <SectionHeading
                 overline="Process"
-                title="Как проходит работа"
-                intro="Прозрачный маршрут от первого сообщения до запуска. Никаких сюрпризов — вы видите каждый этап."
+                title={t.process.title}
+                intro={t.process.intro}
               />
             </div>
           </div>

@@ -3,20 +3,43 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import type { Work } from '@/lib/content';
+import { useT } from '@/lib/i18n';
 
 export function WorkCard({ work }: { work: Work }) {
+  const t = useT();
   return (
     <motion.article
       layout
       initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
       exit={{ opacity: 0, y: 12 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] shadow-glass transition-all duration-500 ease-premium hover:-translate-y-1 hover:border-white/[0.14] hover:shadow-glass-hover sm:rounded-3xl"
     >
+      {/* Whole-card link for real, published projects */}
+      {work.href && (
+        <a
+          href={work.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute inset-0 z-20 focus-ring rounded-2xl sm:rounded-3xl"
+          aria-label={`${work.title} — ${t.common.details}`}
+        />
+      )}
+
       {/* Showcase visual (placeholder). Swap for a real screenshot: put an
           <Image/> here and remove the gradient block. */}
       <div className="relative aspect-[16/10] overflow-hidden">
+        {work.live && (
+          <span className="absolute right-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-ink-950/70 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-gold-soft backdrop-blur sm:right-4 sm:top-4">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold/70 opacity-70" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
+            </span>
+            {t.common.live}
+          </span>
+        )}
         <div
           className="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.06]"
           style={{
@@ -64,7 +87,7 @@ export function WorkCard({ work }: { work: Work }) {
 
         <div className="mt-4 flex items-center justify-between border-t border-white/[0.06] pt-3 sm:mt-6 sm:pt-4">
           <span className="text-xs font-medium text-silver transition-colors group-hover:text-platinum sm:text-sm">
-            Подробнее
+            {t.common.details}
           </span>
           <span className="grid h-8 w-8 place-items-center rounded-full border border-white/10 text-silver transition-all duration-300 group-hover:border-gold/50 group-hover:bg-gold/10 group-hover:text-gold-soft sm:h-9 sm:w-9">
             <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" strokeWidth={1.75} />

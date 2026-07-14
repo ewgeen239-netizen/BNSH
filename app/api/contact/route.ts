@@ -15,6 +15,11 @@ function clean(v: unknown, max = 2000): string {
   return typeof v === 'string' ? v.trim().slice(0, max) : '';
 }
 
+/** Escape for Telegram HTML parse_mode. */
+function esc(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 export async function POST(req: Request) {
   let data: Payload;
   try {
@@ -47,10 +52,42 @@ export async function POST(req: Request) {
     at: new Date().toISOString(),
   };
 
-  // Always log server-side so the lead isn't lost even without email setup.
+  // Always log server-side so the lead isn't lost even without integrations.
   console.info('[BNSH contact] new lead:', lead);
 
-  // Optional: deliver via Resend if configured. Falls back gracefully.
+  // --- Deliver to Telegram bot (primary channel for leads) ---
+  // Set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in the environment.
+  const tgToken = process.env.TELEGRAM_BOT_TOKEN;
+  const tgChat = process.env.TELEGRAM_CHAT_ID;
+
+  if (tgToken && tgChat) {
+    const text =
+      `🟡 <b>Новая заявка — BNSH</b>\n\n` +
+      `👤 <b>Имя:</b> ${esc(name)}\n` +
+      `📞 <b>Контакт:</b> ${esc(contact)}\n` +
+      `🧩 <b>Тип:</b> ${esc(lead.type)}\n` +
+      `📝 <b>Описание:</b> ${esc(lead.message)}\n\n` +
+      `🕐 ${lead.at}`;
+    try {
+      const res = await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: tgChat,
+          text,
+          parse_mode: 'HTML',
+          disable_web_page_preview: true,
+        }),
+      });
+      if (!res.ok) {
+        console.error('[BNSH contact] Telegram failed:', await res.text());
+      }
+    } catch (err) {
+      console.error('[BNSH contact] Telegram error:', err);
+    }
+  }
+
+  // Optional: also deliver via Resend if configured. Falls back gracefully.
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO;
   const from = process.env.CONTACT_FROM ?? 'BNSH Studio <onboarding@resend.dev>';

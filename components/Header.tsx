@@ -5,8 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { navLinks, siteConfig } from '@/lib/site';
 import { scrollToId, cn } from '@/lib/utils';
+import { useT } from '@/lib/i18n';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export function Header() {
+  const t = useT();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -61,24 +64,26 @@ export function Header() {
               onClick={() => go(l.id)}
               className="rounded-full px-3.5 py-2 text-sm text-silver/80 transition-colors hover:text-platinum focus-ring"
             >
-              {l.label}
+              {t.nav[l.id]}
             </button>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
+          <LanguageSwitcher className="hidden sm:inline-flex" />
+
           <button
             onClick={() => go('contact')}
-            className="hidden items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-platinum transition hover:border-gold/40 hover:bg-white/[0.06] focus-ring sm:inline-flex"
+            className="hidden items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-platinum transition hover:border-gold/40 hover:bg-white/[0.06] focus-ring lg:inline-flex"
           >
-            Обсудить проект
+            {t.common.discuss}
             <ArrowUpRight className="h-4 w-4" strokeWidth={1.75} />
           </button>
 
           <button
             onClick={() => setOpen((v) => !v)}
             className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-platinum focus-ring md:hidden"
-            aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
+            aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -102,17 +107,20 @@ export function Header() {
                   onClick={() => go(l.id)}
                   className="flex items-center justify-between rounded-xl px-3 py-3 text-left text-base text-silver transition hover:bg-white/[0.04] hover:text-platinum focus-ring"
                 >
-                  {l.label}
+                  {t.nav[l.id]}
                   <ArrowUpRight className="h-4 w-4 text-faint" strokeWidth={1.5} />
                 </button>
               ))}
+              <div className="mt-2 flex items-center justify-between px-3">
+                <LanguageSwitcher />
+              </div>
               <a
                 href={siteConfig.contacts.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-platinum px-4 py-3 text-sm font-semibold text-ink-950 focus-ring"
               >
-                Написать в Telegram
+                {t.common.writeTelegram}
               </a>
             </nav>
           </motion.div>

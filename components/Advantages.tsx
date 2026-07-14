@@ -3,16 +3,19 @@
 import { SectionHeading } from './SectionHeading';
 import { RevealGroup, RevealItem } from './Reveal';
 import { Icon } from './icon';
-import { advantages } from '@/lib/content';
+import { useLang, useT, getAdvantages } from '@/lib/i18n';
 
 export function Advantages() {
+  const { locale } = useLang();
+  const t = useT();
+  const advantages = getAdvantages(locale);
   return (
     <section className="relative scroll-mt-24 py-12 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-content px-5 sm:px-8">
         <SectionHeading
           overline="Advantages"
-          title="Почему со мной удобно"
-          intro="Работа без лишней бюрократии — с вниманием к результату и вашему времени."
+          title={t.advantages.title}
+          intro={t.advantages.intro}
         />
 
         <RevealGroup className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/[0.07] bg-white/[0.05] sm:mt-12 lg:grid-cols-4">
