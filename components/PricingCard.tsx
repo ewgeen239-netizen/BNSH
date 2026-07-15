@@ -1,17 +1,24 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
-import { RevealItem } from './Reveal';
 import { scrollToId, cn } from '@/lib/utils';
 import { useT } from '@/lib/i18n';
 import type { Plan } from '@/lib/content';
 
-export function PricingCard({ plan }: { plan: Plan }) {
+export function PricingCard({ plan, className }: { plan: Plan; className?: string }) {
   const t = useT();
   return (
-    <RevealItem
+    <motion.div
+      data-card
+      data-featured={plan.featured ? 'true' : undefined}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        'relative flex flex-col overflow-hidden rounded-3xl border p-6 transition-all duration-500 ease-premium hover:-translate-y-1 sm:p-8',
+        'relative flex flex-col overflow-hidden rounded-3xl border p-6 sm:p-8',
+        className,
         plan.featured
           ? 'border-gold/30 bg-gradient-to-b from-white/[0.06] to-white/[0.02] shadow-gold'
           : 'border-white/[0.08] bg-white/[0.02] shadow-glass hover:border-white/[0.16]',
@@ -70,6 +77,6 @@ export function PricingCard({ plan }: { plan: Plan }) {
       >
         {t.common.discuss}
       </button>
-    </RevealItem>
+    </motion.div>
   );
 }
