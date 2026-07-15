@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import type { Work } from '@/lib/content';
@@ -40,25 +41,41 @@ export function WorkCard({ work }: { work: Work }) {
             {t.common.live}
           </span>
         )}
+        {/* base fill (also the tint behind a loading image) */}
         <div
-          className="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.06]"
+          className="absolute inset-0"
           style={{
             background: `radial-gradient(120% 120% at 20% 10%, ${work.accent[1]}33, transparent 55%), linear-gradient(135deg, ${work.accent[0]}, #050505 75%)`,
           }}
         />
-        {/* faux window chrome for a product-shot feel */}
-        <div className="absolute inset-x-4 top-4 flex items-center gap-1.5 opacity-70 sm:inset-x-5 sm:top-5">
-          <span className="h-1.5 w-1.5 rounded-full bg-white/20 sm:h-2 sm:w-2" />
-          <span className="h-1.5 w-1.5 rounded-full bg-white/20 sm:h-2 sm:w-2" />
-          <span className="h-1.5 w-1.5 rounded-full bg-white/20 sm:h-2 sm:w-2" />
-        </div>
-        <div className="absolute inset-x-4 bottom-4 space-y-1.5 sm:inset-x-5 sm:bottom-5 sm:space-y-2">
-          <div className="h-1.5 w-2/3 rounded-full bg-white/15 sm:h-2" />
-          <div className="h-1.5 w-1/2 rounded-full bg-white/10 sm:h-2" />
-        </div>
+
+        {work.image ? (
+          /* Real project screenshot */
+          <Image
+            src={work.image}
+            alt={`${work.title} — ${work.type}`}
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 45vw, 380px"
+            className="object-cover object-top transition-transform duration-700 ease-premium group-hover:scale-[1.04]"
+          />
+        ) : (
+          /* Placeholder: faux window chrome for a product-shot feel */
+          <>
+            <div className="absolute inset-x-4 top-4 flex items-center gap-1.5 opacity-70 sm:inset-x-5 sm:top-5">
+              <span className="h-1.5 w-1.5 rounded-full bg-white/20 sm:h-2 sm:w-2" />
+              <span className="h-1.5 w-1.5 rounded-full bg-white/20 sm:h-2 sm:w-2" />
+              <span className="h-1.5 w-1.5 rounded-full bg-white/20 sm:h-2 sm:w-2" />
+            </div>
+            <div className="absolute inset-x-4 bottom-4 space-y-1.5 sm:inset-x-5 sm:bottom-5 sm:space-y-2">
+              <div className="h-1.5 w-2/3 rounded-full bg-white/15 sm:h-2" />
+              <div className="h-1.5 w-1/2 rounded-full bg-white/10 sm:h-2" />
+            </div>
+          </>
+        )}
+
         {/* grain + sheen */}
         <div className="grain absolute inset-0 opacity-[0.06]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(5,5,5,0.6),transparent_45%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(5,5,5,0.55),transparent_50%)]" />
       </div>
 
       <div className="flex flex-1 flex-col p-4 sm:p-6">

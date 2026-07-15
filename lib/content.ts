@@ -46,21 +46,23 @@ export type Work = {
   accent: [string, string];
   href?: string;
   live?: boolean; // real, published project (vs template placeholder)
+  image?: string; // real screenshot in /public (overrides the gradient visual)
 };
 
 export const works: Work[] = [
   {
     slug: 'balance',
     title: 'Balance',
-    type: 'Сайт бренда напитков',
+    type: 'Сайт бара · коктейли и кальян',
     category: 'websites',
     year: '2025',
     description:
-      'Сайт бренда коктейлей: атмосферный визуал, подача продукта и аккуратная типографика.',
-    stack: ['Next.js', 'Tailwind', 'Motion'],
-    accent: ['#16241c', '#7FB069'],
+      'Сайт лаунж-бара в Щецине: атмосферный визуал, меню, онлайн-бронирование и четыре языка.',
+    stack: ['Next.js', 'Tailwind', 'i18n'],
+    accent: ['#2a1412', '#E8654B'],
     href: 'https://balancecocktails.vercel.app',
     live: true,
+    image: '/works/balance.jpg',
   },
   {
     slug: 'autodoc',
@@ -82,11 +84,12 @@ export const works: Work[] = [
     category: 'websites',
     year: '2025',
     description:
-      'Сайт личного бренда: чистая типографика, портфолио и понятная презентация услуг.',
+      'Сайт личного бренда: студия, портфолио, услуги и мультиязычность. Спокойная премиальная подача.',
     stack: ['Next.js', 'i18n', 'Tailwind'],
     accent: ['#241420', '#E08CB0'],
     href: 'https://krasnovska.vercel.app/ru',
     live: true,
+    image: '/works/krasnovska.jpg',
   },
   {
     slug: 'aurora-clinic',

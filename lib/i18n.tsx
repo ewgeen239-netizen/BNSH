@@ -195,9 +195,9 @@ const ui: Record<Locale, UIDict> = {
 // Works: text overrides keyed by slug for en/pl. ru uses content.ts as-is.
 const worksText: Record<'en' | 'pl', Record<string, { title?: string; type: string; description: string }>> = {
   en: {
-    balance: { type: 'Beverage brand site', description: 'A cocktail brand site: atmospheric visuals, product presentation and refined typography.' },
+    balance: { type: 'Bar website · cocktails & shisha', description: 'A lounge-bar site in Szczecin: atmospheric visuals, menu, online booking and four languages.' },
     autodoc: { type: 'Telegram bot', description: 'A Telegram bot for document tracking — requests and statuses right inside the chat.' },
-    krasnovska: { type: 'Personal brand', description: 'A personal-brand site: clean typography, portfolio and a clear services presentation.' },
+    krasnovska: { type: 'Personal brand', description: 'A personal-brand site: studio, portfolio, services and a multilingual UI. Calm, premium presentation.' },
     'aurora-clinic': { type: 'Clinic website', description: 'A multi-page medical center site: services, doctors, booking. Calm premium tone and clear navigation.' },
     'lumen-coaching': { type: 'Lead landing page', description: 'A selling landing page for an expert: strong structure, cases, a high-converting consultation form.' },
     'vela-finance': { type: 'Web app', description: 'A personal finance dashboard: charts, categories, goals. Thoughtful UX and a light data interface.' },
@@ -208,9 +208,9 @@ const worksText: Record<'en' | 'pl', Record<string, { title?: string; type: stri
     'meridian-os': { type: 'Concept interface', description: 'An experimental workspace concept: bold composition, micro-interactions, motion details.' },
   },
   pl: {
-    balance: { type: 'Strona marki napojów', description: 'Strona marki koktajli: klimatyczna oprawa, prezentacja produktu i dopracowana typografia.' },
+    balance: { type: 'Strona baru · koktajle i shisha', description: 'Strona lounge baru w Szczecinie: klimatyczna oprawa, menu, rezerwacja online i cztery języki.' },
     autodoc: { type: 'Bot Telegram', description: 'Bot Telegram do śledzenia dokumentów — zgłoszenia i statusy prosto na czacie.' },
-    krasnovska: { type: 'Marka osobista', description: 'Strona marki osobistej: czysta typografia, portfolio i jasna prezentacja usług.' },
+    krasnovska: { type: 'Marka osobista', description: 'Strona marki osobistej: studio, portfolio, usługi i wielojęzyczność. Spokojna, premium prezentacja.' },
     'aurora-clinic': { type: 'Strona kliniki', description: 'Wielostronicowa strona centrum medycznego: usługi, lekarze, rejestracja. Spokojny, premium ton.' },
     'lumen-coaching': { type: 'Landing pod zapytania', description: 'Sprzedażowy landing dla eksperta: mocna struktura, case’y, konwertujący formularz konsultacji.' },
     'vela-finance': { type: 'Aplikacja web', description: 'Dashboard finansów osobistych: wykresy, kategorie, cele. Przemyślany UX i lekki interfejs danych.' },
