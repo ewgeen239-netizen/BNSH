@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, Instrument_Serif } from 'next/font/google';
 import { siteConfig } from '@/lib/site';
 import { LanguageProvider } from '@/lib/i18n';
+import { ScrollTop } from '@/components/ScrollTop';
 import './globals.css';
 
 const sans = Inter({
@@ -101,6 +102,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" className={`${sans.variable} ${display.variable}`}>
       <body>
+        {/* Disable native scroll restoration before first paint so a refresh
+            always starts at the top instead of the previous position. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "if('scrollRestoration' in history){history.scrollRestoration='manual';}",
+          }}
+        />
+        <ScrollTop />
         <LanguageProvider>{children}</LanguageProvider>
         <script
           type="application/ld+json"
