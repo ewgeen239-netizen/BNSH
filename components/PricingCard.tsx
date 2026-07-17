@@ -38,16 +38,17 @@ export function PricingCard({ plan, className }: { plan: Plan; className?: strin
         {plan.audience}
       </p>
 
-      <div className="mt-4 flex items-baseline gap-2 sm:mt-6">
+      <div className="mt-4 sm:mt-6">
         <span
           className={cn(
-            'text-3xl font-semibold tracking-tight',
-            plan.featured ? 'text-gold-soft' : 'text-platinum',
+            'inline-flex items-center rounded-full border px-3.5 py-1.5 text-sm font-medium',
+            plan.featured
+              ? 'border-gold/30 bg-gold/[0.08] text-gold-soft'
+              : 'border-white/12 bg-white/[0.03] text-platinum',
           )}
         >
-          {plan.price}
+          {t.pricing.byTask}
         </span>
-        <span className="text-xs text-faint">{plan.priceNote}</span>
       </div>
 
       <ul className="mt-5 space-y-2.5 sm:mt-7 sm:space-y-3">

@@ -67,18 +67,18 @@ export function Hero() {
 
             <motion.h1
               {...rev(0.12)}
-              className="mt-6 text-display-xl font-semibold tracking-tightest text-platinum"
+              className="mt-6 text-display-xl font-bold tracking-tightest text-platinum"
             >
               BNSH <span className="text-gradient-platinum">Studio</span>
             </motion.h1>
 
             <motion.p
               {...rev(0.18)}
-              className="mt-6 max-w-xl font-display text-[1.65rem] leading-[1.2] text-silver sm:text-[2.1rem]"
+              className="font-msserif mt-6 max-w-xl text-[1.6rem] leading-[1.2] text-silver sm:text-[2rem]"
             >
-              <span className="italic">{t.hero.taglineA}</span>
+              <span>{t.hero.taglineA}</span>
               <span className="text-silver/40"> — </span>
-              <span className="text-gradient-gold italic">{t.hero.taglineB}</span>
+              <span className="text-gradient-gold">{t.hero.taglineB}</span>
             </motion.p>
 
             <motion.p

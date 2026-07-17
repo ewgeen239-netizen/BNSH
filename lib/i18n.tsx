@@ -37,9 +37,9 @@ type UIDict = {
     trust: [string, string][];
     scroll: string;
   };
-  works: { title: string; intro: string; filterAll: string };
+  works: { title: string; intro: string; filterAll: string; exampleNote: string };
   services: { title: string; intro: string };
-  pricing: { title: string; intro: string; note: string; popular: string };
+  pricing: { title: string; intro: string; note: string; popular: string; byTask: string };
   advantages: { title: string; intro: string };
   process: { title: string; intro: string };
   contact: {
@@ -77,9 +77,9 @@ const ui: Record<Locale, UIDict> = {
       trust: [['Сайты', 'под бизнес'], ['Лендинги', 'под заявки'], ['Веб-приложения', 'и интерфейсы']],
       scroll: 'Ниже',
     },
-    works: { title: 'Мои работы', intro: 'Подборка сайтов и приложений. Каждый проект — отдельная задача бизнеса и аккуратно собранное решение под неё.', filterAll: 'Все' },
+    works: { title: 'Мои работы', intro: 'Подборка сайтов и приложений. Каждый проект — отдельная задача бизнеса и аккуратно собранное решение под неё.', filterAll: 'Все', exampleNote: 'Это пример того, на что я способен' },
     services: { title: 'Что я делаю', intro: 'От простого лендинга до веб-приложения. Подбираю формат под задачу и веду проект от идеи до запуска.' },
-    pricing: { title: 'Форматы и цены', intro: 'Три понятных формата под разные задачи. Цены — ориентир, чтобы вы понимали порядок.', note: 'Финальная цена зависит от задачи, объёма, контента и сроков. После короткого обсуждения предложу точную смету и формат.', popular: 'Популярно' },
+    pricing: { title: 'Форматы и цены', intro: 'Три понятных формата под разные задачи. Финальная цена — под задачу.', note: 'Финальная цена зависит от задачи, объёма, контента и сроков. После короткого обсуждения предложу точную смету и формат.', popular: 'Популярно', byTask: 'Цена зависит от задачи' },
     advantages: { title: 'Почему со мной удобно', intro: 'Работа без лишней бюрократии — с вниманием к результату и вашему времени.' },
     process: { title: 'Как проходит работа', intro: 'Прозрачный маршрут от первого сообщения до запуска. Никаких сюрпризов — вы видите каждый этап.' },
     contact: {
@@ -119,9 +119,9 @@ const ui: Record<Locale, UIDict> = {
       trust: [['Websites', 'for business'], ['Landing pages', 'for leads'], ['Web apps', 'and interfaces']],
       scroll: 'Scroll',
     },
-    works: { title: 'Selected work', intro: 'A selection of websites and apps. Each project is a specific business problem with a solution built precisely around it.', filterAll: 'All' },
+    works: { title: 'Selected work', intro: 'A selection of websites and apps. Each project is a specific business problem with a solution built precisely around it.', filterAll: 'All', exampleNote: 'An example of what I can build' },
     services: { title: 'What I do', intro: 'From a simple landing page to a web app. I pick the right format for the task and run the project from idea to launch.' },
-    pricing: { title: 'Formats & pricing', intro: 'Three clear formats for different needs. Prices are a guide so you understand the ballpark.', note: 'The final price depends on the task, scope, content and timeline. After a short chat I’ll propose an exact quote and format.', popular: 'Popular' },
+    pricing: { title: 'Formats & pricing', intro: 'Three clear formats for different needs. The final price is scoped to the task.', note: 'The final price depends on the task, scope, content and timeline. After a short chat I’ll propose an exact quote and format.', popular: 'Popular', byTask: 'Price depends on the task' },
     advantages: { title: 'Why it’s easy to work with me', intro: 'Work without extra bureaucracy — with attention to the result and your time.' },
     process: { title: 'How we work', intro: 'A clear path from the first message to launch. No surprises — you see every stage.' },
     contact: {
@@ -161,9 +161,9 @@ const ui: Record<Locale, UIDict> = {
       trust: [['Strony', 'dla biznesu'], ['Landing page', 'pod zapytania'], ['Aplikacje web', 'i interfejsy']],
       scroll: 'Niżej',
     },
-    works: { title: 'Wybrane prace', intro: 'Wybór stron i aplikacji. Każdy projekt to konkretne zadanie biznesowe i rozwiązanie starannie dopasowane pod nie.', filterAll: 'Wszystkie' },
+    works: { title: 'Wybrane prace', intro: 'Wybór stron i aplikacji. Każdy projekt to konkretne zadanie biznesowe i rozwiązanie starannie dopasowane pod nie.', filterAll: 'Wszystkie', exampleNote: 'Przykład tego, co potrafię' },
     services: { title: 'Czym się zajmuję', intro: 'Od prostego landing page po aplikację web. Dobieram format pod zadanie i prowadzę projekt od pomysłu do startu.' },
-    pricing: { title: 'Formaty i ceny', intro: 'Trzy jasne formaty pod różne zadania. Ceny są orientacyjne, żebyś znał rząd wielkości.', note: 'Ostateczna cena zależy od zadania, zakresu, treści i terminu. Po krótkiej rozmowie zaproponuję dokładną wycenę i format.', popular: 'Popularny' },
+    pricing: { title: 'Formaty i ceny', intro: 'Trzy jasne formaty pod różne zadania. Ostateczna cena zależy od zadania.', note: 'Ostateczna cena zależy od zadania, zakresu, treści i terminu. Po krótkiej rozmowie zaproponuję dokładną wycenę i format.', popular: 'Popularny', byTask: 'Cena zależy od zadania' },
     advantages: { title: 'Dlaczego wygodnie się ze mną pracuje', intro: 'Praca bez zbędnej biurokracji — z uwagą na efekt i Twój czas.' },
     process: { title: 'Jak przebiega praca', intro: 'Przejrzysta droga od pierwszej wiadomości do startu. Bez niespodzianek — widzisz każdy etap.' },
     contact: {

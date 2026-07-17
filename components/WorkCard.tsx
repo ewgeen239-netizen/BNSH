@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Sparkles } from 'lucide-react';
 import type { Work } from '@/lib/content';
 import { useT } from '@/lib/i18n';
 
@@ -58,8 +58,8 @@ export function WorkCard({ work }: { work: Work }) {
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 45vw, 380px"
             className="object-cover object-top transition-transform duration-700 ease-premium group-hover:scale-[1.04]"
           />
-        ) : (
-          /* Placeholder: faux window chrome for a product-shot feel */
+        ) : work.live ? (
+          /* Real project without a screenshot (e.g. the Telegram bot) */
           <>
             <div className="absolute inset-x-4 top-4 flex items-center gap-1.5 opacity-70 sm:inset-x-5 sm:top-5">
               <span className="h-1.5 w-1.5 rounded-full bg-white/20 sm:h-2 sm:w-2" />
@@ -71,6 +71,14 @@ export function WorkCard({ work }: { work: Work }) {
               <div className="h-1.5 w-1/2 rounded-full bg-white/10 sm:h-2" />
             </div>
           </>
+        ) : (
+          /* Template / concept — no photo, just a clear "example" note */
+          <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold/25 bg-ink-950/50 px-3.5 py-2 text-[11px] font-medium leading-tight text-gold-soft/90 backdrop-blur sm:text-xs">
+              <Sparkles className="h-3.5 w-3.5 shrink-0" strokeWidth={1.75} />
+              {t.works.exampleNote}
+            </span>
+          </div>
         )}
 
         {/* grain + sheen */}
