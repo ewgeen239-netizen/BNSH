@@ -60,7 +60,7 @@ export const works: Work[] = [
       'Сайт лаунж-бара в Щецине: атмосферный визуал, меню, онлайн-бронирование и четыре языка.',
     stack: ['Next.js', 'Tailwind', 'i18n'],
     accent: ['#2a1412', '#E8654B'],
-    href: 'https://balancecocktails.vercel.app',
+    href: 'https://www.balancecocktails.pl',
     live: true,
     image: '/works/balance.jpg',
   },
