@@ -65,19 +65,6 @@ export const works: Work[] = [
     image: '/works/balance.jpg',
   },
   {
-    slug: 'autodoc',
-    title: 'Tracker AutoDoc',
-    type: 'Telegram-бот',
-    category: 'apps',
-    year: '2025',
-    description:
-      'Telegram-бот для учёта и трекинга документов — заявки и статусы прямо в чате.',
-    stack: ['Telegram Bot API', 'Node.js'],
-    accent: ['#12233a', '#5B8DEF'],
-    href: 'https://t.me/AutDdoc_bot',
-    live: true,
-  },
-  {
     slug: 'krasnovska',
     title: 'Krasnovska',
     type: 'Персональный бренд',

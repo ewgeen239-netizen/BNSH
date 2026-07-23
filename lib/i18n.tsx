@@ -196,7 +196,6 @@ const ui: Record<Locale, UIDict> = {
 const worksText: Record<'en' | 'pl', Record<string, { title?: string; type: string; description: string }>> = {
   en: {
     balance: { type: 'Bar website · cocktails & shisha', description: 'A lounge-bar site in Szczecin: atmospheric visuals, menu, online booking and four languages.' },
-    autodoc: { type: 'Telegram bot', description: 'A Telegram bot for document tracking — requests and statuses right inside the chat.' },
     krasnovska: { type: 'Personal brand', description: 'A personal-brand site: studio, portfolio, services and a multilingual UI. Calm, premium presentation.' },
     'aurora-clinic': { type: 'Clinic website', description: 'A multi-page medical center site: services, doctors, booking. Calm premium tone and clear navigation.' },
     'lumen-coaching': { type: 'Lead landing page', description: 'A selling landing page for an expert: strong structure, cases, a high-converting consultation form.' },
@@ -209,7 +208,6 @@ const worksText: Record<'en' | 'pl', Record<string, { title?: string; type: stri
   },
   pl: {
     balance: { type: 'Strona baru · koktajle i shisha', description: 'Strona lounge baru w Szczecinie: klimatyczna oprawa, menu, rezerwacja online i cztery języki.' },
-    autodoc: { type: 'Bot Telegram', description: 'Bot Telegram do śledzenia dokumentów — zgłoszenia i statusy prosto na czacie.' },
     krasnovska: { type: 'Marka osobista', description: 'Strona marki osobistej: studio, portfolio, usługi i wielojęzyczność. Spokojna, premium prezentacja.' },
     'aurora-clinic': { type: 'Strona kliniki', description: 'Wielostronicowa strona centrum medycznego: usługi, lekarze, rejestracja. Spokojny, premium ton.' },
     'lumen-coaching': { type: 'Landing pod zapytania', description: 'Sprzedażowy landing dla eksperta: mocna struktura, case’y, konwertujący formularz konsultacji.' },
