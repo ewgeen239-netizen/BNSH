@@ -39,6 +39,12 @@ type UIDict = {
   };
   works: { title: string; intro: string; filterAll: string; exampleNote: string };
   services: { title: string; intro: string };
+  about: {
+    title: string;
+    paragraphs: [string, string, string];
+    facts: { k: string; v: string }[];
+    cta: string;
+  };
   pricing: { title: string; intro: string; note: string; popular: string; byTask: string };
   advantages: { title: string; intro: string };
   process: { title: string; intro: string };
@@ -79,6 +85,20 @@ const ui: Record<Locale, UIDict> = {
     },
     works: { title: 'Мои работы', intro: 'Подборка сайтов и приложений. Каждый проект — отдельная задача бизнеса и аккуратно собранное решение под неё.', filterAll: 'Все', exampleNote: 'Это пример того, на что я способен' },
     services: { title: 'Что я делаю', intro: 'От простого лендинга до веб-приложения. Подбираю формат под задачу и веду проект от идеи до запуска.' },
+    about: {
+      title: 'Немного обо мне',
+      paragraphs: [
+        'Я работаю один и лично веду каждый проект. Это значит, что вы общаетесь напрямую с человеком, который делает сайт — без посредников, менеджеров и потери смысла между этапами.',
+        'Фокус — на аккуратности, скорости и визуальном качестве. Мне важно, чтобы результат выглядел дорого, работал быстро и решал конкретную задачу бизнеса, а не просто «был красивым».',
+        'Без образа большой студии — но с профессиональным подходом: понятные этапы, честные сроки и внимание к деталям на каждом шаге.',
+      ],
+      facts: [
+        { k: 'Один специалист', v: 'веду проект лично' },
+        { k: 'От идеи', v: 'до готового результата' },
+        { k: 'Понятная', v: 'коммуникация без воды' },
+      ],
+      cta: 'Посмотреть форматы и цены',
+    },
     pricing: { title: 'Форматы и цены', intro: 'Три понятных формата под разные задачи. Финальная цена — под задачу.', note: 'Финальная цена зависит от задачи, объёма, контента и сроков. После короткого обсуждения предложу точную смету и формат.', popular: 'Популярно', byTask: 'Цена зависит от задачи' },
     advantages: { title: 'Почему со мной удобно', intro: 'Работа без лишней бюрократии — с вниманием к результату и вашему времени.' },
     process: { title: 'Как проходит работа', intro: 'Прозрачный маршрут от первого сообщения до запуска. Никаких сюрпризов — вы видите каждый этап.' },
@@ -121,6 +141,20 @@ const ui: Record<Locale, UIDict> = {
     },
     works: { title: 'Selected work', intro: 'A selection of websites and apps. Each project is a specific business problem with a solution built precisely around it.', filterAll: 'All', exampleNote: 'An example of what I can build' },
     services: { title: 'What I do', intro: 'From a simple landing page to a web app. I pick the right format for the task and run the project from idea to launch.' },
+    about: {
+      title: 'A bit about me',
+      paragraphs: [
+        'I work solo and personally lead every project. That means you talk directly to the person who builds the site — no middlemen, no managers, no meaning lost between stages.',
+        'The focus is on precision, speed and visual quality. It matters to me that the result looks premium, runs fast and solves a real business task — not just “looks nice”.',
+        'No big-studio image — but a professional approach: clear stages, honest deadlines and attention to detail at every step.',
+      ],
+      facts: [
+        { k: 'One specialist', v: 'I lead the project personally' },
+        { k: 'From idea', v: 'to a finished result' },
+        { k: 'Clear', v: 'communication, no fluff' },
+      ],
+      cta: 'See formats & pricing',
+    },
     pricing: { title: 'Formats & pricing', intro: 'Three clear formats for different needs. The final price is scoped to the task.', note: 'The final price depends on the task, scope, content and timeline. After a short chat I’ll propose an exact quote and format.', popular: 'Popular', byTask: 'Price depends on the task' },
     advantages: { title: 'Why it’s easy to work with me', intro: 'Work without extra bureaucracy — with attention to the result and your time.' },
     process: { title: 'How we work', intro: 'A clear path from the first message to launch. No surprises — you see every stage.' },
@@ -163,6 +197,20 @@ const ui: Record<Locale, UIDict> = {
     },
     works: { title: 'Wybrane prace', intro: 'Wybór stron i aplikacji. Każdy projekt to konkretne zadanie biznesowe i rozwiązanie starannie dopasowane pod nie.', filterAll: 'Wszystkie', exampleNote: 'Przykład tego, co potrafię' },
     services: { title: 'Czym się zajmuję', intro: 'Od prostego landing page po aplikację web. Dobieram format pod zadanie i prowadzę projekt od pomysłu do startu.' },
+    about: {
+      title: 'Kilka słów o mnie',
+      paragraphs: [
+        'Pracuję sam i osobiście prowadzę każdy projekt. To znaczy, że rozmawiasz wprost z osobą, która robi stronę — bez pośredników, menedżerów i gubienia sensu między etapami.',
+        'Skupiam się na precyzji, szybkości i jakości wizualnej. Zależy mi, żeby efekt wyglądał premium, działał szybko i rozwiązywał konkretne zadanie biznesowe — a nie tylko „ładnie wyglądał”.',
+        'Bez wizerunku dużego studia — ale z profesjonalnym podejściem: jasne etapy, uczciwe terminy i dbałość o detale na każdym kroku.',
+      ],
+      facts: [
+        { k: 'Jeden specjalista', v: 'prowadzę projekt osobiście' },
+        { k: 'Od pomysłu', v: 'do gotowego rezultatu' },
+        { k: 'Jasna', v: 'komunikacja bez lania wody' },
+      ],
+      cta: 'Zobacz formaty i ceny',
+    },
     pricing: { title: 'Formaty i ceny', intro: 'Trzy jasne formaty pod różne zadania. Ostateczna cena zależy od zadania.', note: 'Ostateczna cena zależy od zadania, zakresu, treści i terminu. Po krótkiej rozmowie zaproponuję dokładną wycenę i format.', popular: 'Popularny', byTask: 'Cena zależy od zadania' },
     advantages: { title: 'Dlaczego wygodnie się ze mną pracuje', intro: 'Praca bez zbędnej biurokracji — z uwagą na efekt i Twój czas.' },
     process: { title: 'Jak przebiega praca', intro: 'Przejrzysta droga od pierwszej wiadomości do startu. Bez niespodzianek — widzisz każdy etap.' },

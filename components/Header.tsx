@@ -47,7 +47,7 @@ export function Header() {
         <button
           onClick={() => go('hero')}
           className="group flex items-center gap-2.5 rounded-full focus-ring"
-          aria-label="BNSH Studio — наверх"
+          aria-label={`BNSH Studio — ${t.common.toTop}`}
         >
           <span className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.03] text-[13px] font-semibold tracking-tight text-platinum transition group-hover:border-gold/40">
             B
