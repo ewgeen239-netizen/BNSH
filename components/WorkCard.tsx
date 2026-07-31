@@ -6,16 +6,23 @@ import { ArrowUpRight, Sparkles } from 'lucide-react';
 import type { Work } from '@/lib/content';
 import { useT } from '@/lib/i18n';
 
-export function WorkCard({ work }: { work: Work }) {
+export function WorkCard({ work, plain = false }: { work: Work; plain?: boolean }) {
   const t = useT();
+  // `plain` renders a static card — used inside the carousel, where the stage
+  // owns the transforms and a nested layout animation would fight them.
+  const motionProps = plain
+    ? {}
+    : {
+        layout: true as const,
+        initial: { opacity: 0, y: 24 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: '-40px' },
+        exit: { opacity: 0, y: 12 },
+        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+      };
   return (
     <motion.article
-      layout
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      exit={{ opacity: 0, y: 12 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      {...motionProps}
       className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] shadow-glass transition-all duration-500 ease-premium hover:-translate-y-1 hover:border-white/[0.14] hover:shadow-glass-hover sm:rounded-3xl"
     >
       {/* Whole-card link for real, published projects */}
