@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { AnimatePresence, LayoutGroup } from 'framer-motion';
 import { SectionHeading } from './SectionHeading';
 import { Reveal } from './Reveal';
 import { WorkCard } from './WorkCard';
@@ -56,26 +55,14 @@ export function SelectedWorks() {
           </div>
         </Reveal>
 
-        {/* Mobile / tablet: dense grid */}
-        <LayoutGroup>
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-6 lg:hidden">
-            <AnimatePresence mode="popLayout">
-              {filtered.map((w) => (
-                <WorkCard key={w.slug} work={w} />
-              ))}
-            </AnimatePresence>
-          </div>
-        </LayoutGroup>
-
-        {/* Desktop: role-based carousel */}
-        <div className="mt-14 hidden lg:block">
+        <div className="mt-8 sm:mt-12">
           <RoleCarousel
             items={filtered}
             getKey={(w) => w.slug}
             resetKey={filter}
             label={t.works.title}
-            cardWidth={420}
-            height={560}
+            stageClassName="h-[430px] sm:h-[600px]"
+            cardClassName="w-[286px] sm:w-[420px]"
             showCounter
             glowFor={(w) => `${w.accent[1]}26`}
             renderItem={(w) => <WorkCard work={w} plain />}

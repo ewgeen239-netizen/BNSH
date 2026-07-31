@@ -16,13 +16,33 @@ const TRANSITION =
 
 type Role = 'center' | 'left' | 'right' | 'back';
 
-/** The active item sits front and centre; the rest recede and blur away. */
-const ROLE_STYLE: Record<Role, CSSProperties> = {
-  center: { left: '50%', transform: 'translate(-50%, -50%) scale(1)', filter: 'blur(0px)', opacity: 1, zIndex: 20 },
-  left: { left: '16%', transform: 'translate(-50%, -50%) scale(0.84)', filter: 'blur(2px)', opacity: 0.5, zIndex: 10 },
-  right: { left: '84%', transform: 'translate(-50%, -50%) scale(0.84)', filter: 'blur(2px)', opacity: 0.5, zIndex: 10 },
-  back: { left: '50%', transform: 'translate(-50%, -50%) scale(0.7)', filter: 'blur(4px)', opacity: 0, zIndex: 5 },
+/**
+ * Placement is driven by CSS variables so the breakpoint lives in CSS, not in
+ * JS state — a stale `isMobile` flag would otherwise size the stage wrongly
+ * after a resize. The consuming properties still transition when a var changes.
+ *
+ * On phones the neighbours sit further out and shrink harder, so the centre
+ * card stays readable on a narrow screen.
+ */
+const ROLE_CLASS: Record<Role, string> = {
+  center: 'z-20 [--rl:50%] [--ro:1] [--rs:1] [--rb:0px]',
+  left: 'z-10 [--rl:4%] [--ro:0.32] [--rs:0.72] [--rb:2px] sm:[--rl:16%] sm:[--ro:0.5] sm:[--rs:0.84]',
+  right: 'z-10 [--rl:96%] [--ro:0.32] [--rs:0.72] [--rb:2px] sm:[--rl:84%] sm:[--ro:0.5] sm:[--rs:0.84]',
+  back: 'z-[5] [--rl:50%] [--ro:0] [--rs:0.6] [--rb:4px] sm:[--rs:0.7]',
 };
+
+const ROLE_STYLE: CSSProperties = {
+  position: 'absolute',
+  top: '50%',
+  left: 'var(--rl)',
+  opacity: 'var(--ro)',
+  transform: 'translate(-50%, -50%) scale(var(--rs))',
+  filter: 'blur(var(--rb))',
+  transition: TRANSITION,
+  willChange: 'transform, filter, opacity',
+};
+
+const SWIPE_THRESHOLD = 45;
 
 type RoleCarouselProps<T> = {
   items: T[];
@@ -32,13 +52,17 @@ type RoleCarouselProps<T> = {
   initialIndex?: number;
   /** Change this (e.g. the active filter) to snap back to `initialIndex`. */
   resetKey?: string;
-  cardWidth?: number;
-  height?: number;
+  /** Responsive height for the stage, e.g. "h-[430px] sm:h-[560px]". */
+  stageClassName: string;
+  /** Responsive width for each card, e.g. "w-[286px] sm:w-[420px]". */
+  cardClassName: string;
   /** Optional accent glow behind the stage, crossfaded with the active item. */
   glowFor?: (item: T, index: number) => string | undefined;
   label: string;
   /** Show a "3 / 10" position counter — useful when there are many items. */
   showCounter?: boolean;
+  /** Show dot indicators — better for a short list. */
+  showDots?: boolean;
 };
 
 export function RoleCarousel<T>({
@@ -47,11 +71,12 @@ export function RoleCarousel<T>({
   renderItem,
   initialIndex = 0,
   resetKey,
-  cardWidth = 380,
-  height = 580,
+  stageClassName,
+  cardClassName,
   glowFor,
   label,
   showCounter = false,
+  showDots = false,
 }: RoleCarouselProps<T>) {
   const count = items.length;
   const [active, setActive] = useState(initialIndex);
@@ -99,6 +124,27 @@ export function RoleCarousel<T>({
     });
   }
 
+  /* ---------------- touch swipe (phones/tablets) ---------------- */
+
+  const touchRef = useRef<{ x: number; y: number } | null>(null);
+
+  function onTouchStart(e: React.TouchEvent) {
+    const t = e.touches[0];
+    touchRef.current = { x: t.clientX, y: t.clientY };
+  }
+
+  function onTouchEnd(e: React.TouchEvent) {
+    const start = touchRef.current;
+    touchRef.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    // Ignore mostly-vertical gestures so page scrolling still works.
+    if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) < Math.abs(dy)) return;
+    navigate(dx < 0 ? 'next' : 'prev');
+  }
+
   function roleOf(i: number): Role {
     if (i === current) return 'center';
     if (i === (current + 1) % count) return 'right';
@@ -112,8 +158,9 @@ export function RoleCarousel<T>({
   return (
     <div>
       <div
-        className="relative w-full"
-        style={{ height }}
+        className={cn('relative w-full overflow-hidden', stageClassName)}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
         role="group"
         aria-roledescription="carousel"
         aria-label={label}
@@ -136,15 +183,8 @@ export function RoleCarousel<T>({
             <div
               key={getKey(item, i)}
               onClick={() => !isCenter && focusIndex(i)}
-              style={{
-                position: 'absolute',
-                top: '50%',
-                width: cardWidth,
-                transition: TRANSITION,
-                willChange: 'transform, filter, opacity',
-                ...ROLE_STYLE[role],
-              }}
-              className={cn(!isCenter && 'cursor-pointer')}
+              style={ROLE_STYLE}
+              className={cn(ROLE_CLASS[role], cardClassName, !isCenter && 'cursor-pointer')}
               aria-hidden={!isCenter}
             >
               {/* Side cards are inert — a click focuses them instead. */}
@@ -156,27 +196,44 @@ export function RoleCarousel<T>({
         })}
       </div>
 
-      <div className="mt-8 flex items-center justify-center gap-4">
+      <div className="mt-6 flex items-center justify-center gap-3 sm:mt-8 sm:gap-4">
         <button
           onClick={() => navigate('prev')}
           aria-label={`${label} — prev`}
-          className="grid h-16 w-16 place-items-center rounded-full border-2 border-white/20 bg-transparent text-platinum transition-[transform,background-color,border-color] duration-150 hover:scale-[1.08] hover:border-gold/40 hover:bg-white/[0.12] focus-ring"
+          className="grid h-12 w-12 place-items-center rounded-full border-2 border-white/20 bg-transparent text-platinum transition-[transform,background-color,border-color] duration-150 hover:scale-[1.08] hover:border-gold/40 hover:bg-white/[0.12] focus-ring sm:h-16 sm:w-16"
         >
-          <ArrowLeft size={26} strokeWidth={2.25} />
+          <ArrowLeft className="h-[22px] w-[22px] sm:h-[26px] sm:w-[26px]" strokeWidth={2.25} />
         </button>
 
         {showCounter && (
-          <span className="min-w-[64px] text-center text-sm tabular-nums text-silver/70">
+          <span className="min-w-[56px] text-center text-sm tabular-nums text-silver/70 sm:min-w-[64px]">
             <span className="text-platinum">{count === 0 ? 0 : current + 1}</span> / {count}
           </span>
+        )}
+
+        {showDots && (
+          <div className="flex items-center gap-2 px-1">
+            {items.map((item, i) => (
+              <button
+                key={getKey(item, i)}
+                onClick={() => focusIndex(i)}
+                aria-current={i === current}
+                aria-label={`${label} ${i + 1}`}
+                className={cn(
+                  'h-1.5 rounded-full transition-all duration-300 focus-ring',
+                  i === current ? 'w-6 bg-gold-soft' : 'w-1.5 bg-white/20 hover:bg-white/40',
+                )}
+              />
+            ))}
+          </div>
         )}
 
         <button
           onClick={() => navigate('next')}
           aria-label={`${label} — next`}
-          className="grid h-16 w-16 place-items-center rounded-full border-2 border-white/20 bg-transparent text-platinum transition-[transform,background-color,border-color] duration-150 hover:scale-[1.08] hover:border-gold/40 hover:bg-white/[0.12] focus-ring"
+          className="grid h-12 w-12 place-items-center rounded-full border-2 border-white/20 bg-transparent text-platinum transition-[transform,background-color,border-color] duration-150 hover:scale-[1.08] hover:border-gold/40 hover:bg-white/[0.12] focus-ring sm:h-16 sm:w-16"
         >
-          <ArrowRight size={26} strokeWidth={2.25} />
+          <ArrowRight className="h-[22px] w-[22px] sm:h-[26px] sm:w-[26px]" strokeWidth={2.25} />
         </button>
       </div>
     </div>
