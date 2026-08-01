@@ -90,7 +90,7 @@ export const works: Work[] = [
     accent: ['#241420', '#E08CB0'],
     href: 'https://brozonetest1.vercel.app/',
     live: true,
-    image: '/works/Brozone.jpg',
+    image: '/works/brozone.jpg',
   },
   {
     slug: 'sushi',
