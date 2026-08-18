@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import { SectionHeading } from './SectionHeading';
 import { Reveal } from './Reveal';
 import { WorkCard } from './WorkCard';
-import { RoleCarousel } from './RoleCarousel';
+import { WorkRail } from './WorkRail';
 import { workFilters, type WorkCategory } from '@/lib/content';
 import { useLang, useT, getWorks } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
@@ -31,41 +31,48 @@ export function SelectedWorks() {
           intro={t.works.intro}
         />
 
-        {/* filters */}
+        {/* filters — a console selector rather than pill buttons */}
         <Reveal delay={0.1} className="mt-6 sm:mt-10">
-          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
             {workFilters.map((f) => {
               const active = filter === f.id;
+              const n = f.id === 'all' ? works.length : works.filter((w) => w.category === f.id).length;
               return (
                 <button
                   key={f.id}
                   onClick={() => setFilter(f.id)}
                   className={cn(
-                    'rounded-full border px-3.5 py-1.5 text-xs transition-all duration-300 focus-ring sm:px-4 sm:py-2 sm:text-sm',
+                    'group relative inline-flex items-center gap-2 rounded border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] transition-all duration-300 focus-ring sm:px-3.5 sm:py-2 sm:text-[11px]',
                     active
-                      ? 'border-transparent bg-platinum text-ink-950'
-                      : 'border-white/10 bg-white/[0.02] text-silver hover:border-white/20 hover:text-platinum',
+                      ? 'border-gold/45 bg-gold/[0.08] text-gold-soft'
+                      : 'border-white/[0.09] bg-white/[0.015] text-muted hover:border-white/25 hover:text-silver',
                   )}
                   aria-pressed={active}
                 >
+                  <span
+                    className={cn(
+                      'h-1 w-1 rounded-full transition-colors duration-300',
+                      active ? 'bg-gold-soft' : 'bg-white/20 group-hover:bg-white/40',
+                    )}
+                  />
                   {f.id === 'all' ? t.works.filterAll : f.label}
+                  <span className="tabular-nums text-[9px] opacity-50 sm:text-[10px]">{n}</span>
                 </button>
               );
             })}
           </div>
         </Reveal>
 
-        <div className="mt-8 sm:mt-12">
-          <RoleCarousel
+        <div className="mt-8 sm:mt-14">
+          <WorkRail
             items={filtered}
             getKey={(w) => w.slug}
             resetKey={filter}
             label={t.works.title}
-            stageClassName="h-[430px] sm:h-[600px]"
-            cardClassName="w-[286px] sm:w-[420px]"
-            showCounter
-            glowFor={(w) => `${w.accent[1]}26`}
-            renderItem={(w) => <WorkCard work={w} plain />}
+            stageClassName="h-[452px] sm:h-[556px]"
+            cardClassName="w-[300px] sm:w-[440px]"
+            glowFor={(w) => `${w.accent[1]}22`}
+            renderItem={(w, isCenter) => <WorkCard work={w} plain active={isCenter} />}
           />
         </div>
       </div>
