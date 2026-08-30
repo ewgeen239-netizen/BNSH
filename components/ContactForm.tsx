@@ -4,7 +4,7 @@ import { useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Loader2, CheckCircle2, AlertCircle, Send } from 'lucide-react';
 import { validateName, validateContact, validateContactForm } from '@/lib/validation';
-import { useT } from '@/lib/i18n';
+import { useLang, useT } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
@@ -16,6 +16,7 @@ const inputOk = 'border-white/10 focus:border-gold/40 focus:ring-gold/20';
 const inputBad = 'border-red-500/40 focus:border-red-500/50 focus:ring-red-500/20';
 
 export function ContactForm() {
+  const { locale } = useLang();
   const t = useT();
   const f = t.contact.form;
   const [status, setStatus] = useState<Status>('idle');
@@ -75,7 +76,9 @@ export function ContactForm() {
           setStatus('idle');
           return;
         }
-        throw new Error(body.error ?? f.errorGeneric);
+        // The route answers in Russian for the logs; the visitor gets the
+        // localized message, which already points at the direct Telegram link.
+        throw new Error(f.errorGeneric);
       }
 
       setStatus('success');
@@ -191,6 +194,8 @@ export function ContactForm() {
           className={cn(inputBase, inputOk, 'resize-none')}
         />
       </div>
+
+      <input type="hidden" name="locale" value={locale} />
 
       {/* honeypot */}
       <input
