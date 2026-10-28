@@ -45,7 +45,7 @@ export function About() {
           <div className="lg:col-span-5">
             <Reveal delay={0.1}>
               <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6 shadow-panel sm:p-8">
-                <div className="absolute -right-16 -top-16 h-40 w-40 bg-[radial-gradient(circle,rgba(40,224,240,0.16),transparent_60%)] blur-2xl" />
+                <div className="absolute -right-16 -top-16 h-40 w-40 bg-[radial-gradient(circle,rgba(201,164,255,0.16),transparent_60%)] blur-2xl" />
                 <span className="block font-sans text-7xl font-extrabold leading-none tracking-tight text-gradient-neon sm:text-8xl">
                   BNSH
                 </span>

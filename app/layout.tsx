@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Unbounded, JetBrains_Mono } from 'next/font/google';
+import { Inter, Unbounded, JetBrains_Mono, Silkscreen } from 'next/font/google';
 import { siteConfig } from '@/lib/site';
 import { LanguageProvider } from '@/lib/i18n';
 import { ConsentProvider } from '@/lib/consent';
@@ -28,6 +28,14 @@ const display = Unbounded({
 const mono = JetBrains_Mono({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-mono',
+  display: 'swap',
+});
+
+// 8-bit face, used only for the giant title behind the hero's particles.
+const pixel = Silkscreen({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-pixel',
   display: 'swap',
 });
 
@@ -112,7 +120,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="ru" className={`${sans.variable} ${display.variable} ${mono.variable}`}>
+    <html lang="ru" className={`${sans.variable} ${display.variable} ${mono.variable} ${pixel.variable}`}>
       <body>
         {/* Disable native scroll restoration before first paint so a refresh
             always starts at the top instead of the previous position. */}

@@ -138,7 +138,7 @@ function PreviewCard({
   visible: boolean;
   hint?: string;
 }) {
-  const accent = item.accent ?? '#28E0F0';
+  const accent = item.accent ?? '#C9A4FF';
 
   return (
     <div
@@ -156,7 +156,7 @@ function PreviewCard({
         ['--a' as string]: accent,
       }}
     >
-      <div className="notch relative overflow-hidden border border-white/10 bg-ink-900/95 p-1.5 shadow-panel backdrop-blur-sm">
+      <div className="rounded-2xl relative overflow-hidden border border-white/10 bg-ink-900/95 p-1.5 shadow-panel backdrop-blur-sm">
         {/* power-on hairline */}
         <span
           className="absolute inset-x-0 top-0 h-px"
@@ -217,7 +217,7 @@ export function PreviewLink({
   if (!ctx) throw new Error('PreviewLink must be used within HoverPreviewProvider');
 
   const item = ctx.items[id];
-  const accent = item?.accent ?? '#28E0F0';
+  const accent = item?.accent ?? '#C9A4FF';
 
   const props = {
     ref,

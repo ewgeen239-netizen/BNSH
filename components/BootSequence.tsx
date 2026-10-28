@@ -113,16 +113,16 @@ export function BootSequence() {
       const p = Math.min(1, elapsed / DURATION);
 
       // trail: a translucent wash instead of a clear, so glyphs smear downward
-      ctx.fillStyle = 'rgba(4, 6, 10, 0.16)';
+      ctx.fillStyle = 'rgba(6, 6, 8, 0.16)';
       ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
       for (let i = 0; i < cols; i++) {
         const y = drops[i] * size;
         const g = GLYPHS[(Math.random() * GLYPHS.length) | 0];
         // the head is bright, the tail is a dim cyan
-        ctx.fillStyle = 'rgba(127, 240, 250, 0.92)';
+        ctx.fillStyle = 'rgba(228, 210, 255, 0.92)';
         ctx.fillText(g, i * size, y);
-        ctx.fillStyle = 'rgba(40, 224, 240, 0.22)';
+        ctx.fillStyle = 'rgba(201, 164, 255, 0.24)';
         ctx.fillText(GLYPHS[(Math.random() * GLYPHS.length) | 0], i * size, y - size);
 
         drops[i] += 0.9 + Math.random() * 0.7;
@@ -181,9 +181,9 @@ export function BootSequence() {
       {/* vignette + scanlines so the rain sits behind glass */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_45%,transparent,rgba(4,6,10,0.92))]"
+        className="absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_45%,transparent,rgba(6,6,8,0.92))]"
       />
-      <div aria-hidden="true" className="scanlines absolute inset-0 opacity-50" />
+      <div aria-hidden="true" className="scanlines absolute inset-0 opacity-[0.28]" />
 
       {/* the curtain: a cyan seam that snaps open as the overlay leaves */}
       <div
@@ -192,7 +192,7 @@ export function BootSequence() {
         style={{
           transform: `translateY(-50%) scaleX(${out ? 1 : 0.18})`,
           opacity: out ? 1 : 0.5,
-          boxShadow: '0 0 30px 2px rgba(40,224,240,0.65)',
+          boxShadow: '0 0 30px 2px rgba(201,164,255,0.65)',
           transition: `transform ${OUT}ms cubic-bezier(0.22,1,0.36,1), opacity ${OUT}ms linear`,
         }}
       />
@@ -208,7 +208,7 @@ export function BootSequence() {
 
         <h1
           className="mt-5 font-mono text-[clamp(2.75rem,12vw,6rem)] font-bold leading-none tracking-[0.08em] text-platinum"
-          style={{ textShadow: '-2px 0 0 rgba(255,61,138,0.5), 2px 0 0 rgba(40,224,240,0.6)' }}
+          style={{ textShadow: '-2px 0 0 rgba(240,169,46,0.5), 2px 0 0 rgba(201,164,255,0.65)' }}
         >
           {title}
         </h1>
@@ -224,9 +224,9 @@ export function BootSequence() {
             <span>{pct < 100 ? t.boot.decrypt : t.boot.ready}</span>
             <span className="tabular-nums text-neon-soft">{String(pct).padStart(3, '0')}%</span>
           </div>
-          <div className="relative mt-2 h-px w-full bg-white/10">
+          <div className="relative mt-2 h-px w-full rounded-full bg-white/10">
             <span
-              className="absolute inset-y-0 left-0 bg-neon shadow-[0_0_12px_rgba(40,224,240,0.8)]"
+              className="absolute inset-y-0 left-0 rounded-full bg-neon shadow-[0_0_12px_rgba(201,164,255,0.8)]"
               style={{ width: `${pct}%` }}
             />
           </div>

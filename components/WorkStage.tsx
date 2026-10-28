@@ -138,7 +138,7 @@ export function WorkStage({ items }: { items: Work[] }) {
         role="group"
         aria-roledescription="carousel"
         aria-label={t.archive.overline}
-        className="group notch relative aspect-[4/5] overflow-hidden border border-white/[0.09] bg-ink-900 outline-none focus-visible:border-neon/50 sm:aspect-[16/10] lg:aspect-auto lg:h-[min(72vh,620px)]"
+        className="group rounded-2xl relative h-[68svh] min-h-[460px] overflow-hidden border border-white/[0.09] bg-ink-900 outline-none focus-visible:border-neon/50 sm:aspect-[16/10] sm:h-auto sm:min-h-0 lg:aspect-auto lg:h-[min(72vh,620px)]"
       >
         {/* accent bloom behind the frame */}
         <div
@@ -191,14 +191,14 @@ export function WorkStage({ items }: { items: Work[] }) {
             className="pointer-events-none absolute inset-0 z-20 mix-blend-screen"
             style={{
               background:
-                'linear-gradient(90deg, rgba(255,61,138,0.22), transparent 30%, transparent 70%, rgba(40,224,240,0.22))',
+                'linear-gradient(90deg, rgba(240,169,46,0.22), transparent 30%, transparent 70%, rgba(201,164,255,0.22))',
               animation: `glitch-x ${GLITCH}ms steps(2, end) 1, fade-in ${GLITCH}ms reverse forwards`,
             }}
           />
         )}
 
         {/* treatment: scanlines, grid, grain, vignette */}
-        <div aria-hidden="true" className="scanlines absolute inset-0 z-10 opacity-[0.18] mix-blend-overlay" />
+        <div aria-hidden="true" className="scanlines absolute inset-0 z-10 opacity-[0.12] mix-blend-overlay" />
         <div
           aria-hidden="true"
           className="absolute inset-0 z-10 bg-grid-faint bg-[size:48px_48px] opacity-40 mix-blend-overlay"
@@ -239,7 +239,7 @@ export function WorkStage({ items }: { items: Work[] }) {
           <h3 className="mt-2 font-display text-2xl font-bold leading-none tracking-tightest text-platinum sm:text-4xl">
             {work.title}
           </h3>
-          <p className="mt-3 max-w-xl text-xs leading-relaxed text-silver/75 sm:text-sm">
+          <p className="mt-3 line-clamp-2 max-w-xl text-xs leading-relaxed text-silver/75 sm:line-clamp-none sm:text-sm">
             {work.description}
           </p>
 
@@ -249,7 +249,7 @@ export function WorkStage({ items }: { items: Work[] }) {
                 href={work.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="notch-sm inline-flex items-center gap-2 border px-4 py-2 font-mono text-[10px] uppercase tracking-hud text-ink-950 transition-opacity duration-300 hover:opacity-90 focus-ring"
+                className="rounded-full inline-flex items-center gap-2 border px-4 py-2 font-mono text-[10px] uppercase tracking-hud text-ink-950 transition-opacity duration-300 hover:opacity-90 focus-ring"
                 style={{ background: accent, borderColor: accent }}
               >
                 {t.archive.openLive}
@@ -298,7 +298,12 @@ export function WorkStage({ items }: { items: Work[] }) {
           </button>
         </div>
 
-        <ul className="no-scrollbar flex max-h-none snap-x gap-2 overflow-x-auto border-t border-white/[0.07] pt-2 lg:max-h-[min(72vh,620px)] lg:snap-none lg:flex-col lg:gap-0 lg:overflow-y-auto lg:pt-0">
+        <div className="relative min-w-0">
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-ink-950 to-transparent lg:hidden"
+          />
+          <ul className="no-scrollbar flex max-h-none snap-x gap-2 overflow-x-auto border-t border-white/[0.07] pt-2 lg:max-h-[min(72vh,620px)] lg:snap-none lg:flex-col lg:gap-0 lg:overflow-y-auto lg:pt-0">
           {items.map((w, i) => {
             const on = i === active;
             return (
@@ -358,7 +363,7 @@ export function WorkStage({ items }: { items: Work[] }) {
                   {w.live && (
                     <span
                       aria-hidden="true"
-                      className={cn('mt-1.5 h-1 w-1 shrink-0 rounded-full transition-opacity', on ? 'opacity-100' : 'opacity-40')}
+                      className={cn('mt-1.5 h-1 w-1 rounded-full shrink-0 rounded-full transition-opacity', on ? 'opacity-100' : 'opacity-40')}
                       style={{ background: w.accent[1] }}
                     />
                   )}
@@ -366,7 +371,8 @@ export function WorkStage({ items }: { items: Work[] }) {
               </li>
             );
           })}
-        </ul>
+          </ul>
+        </div>
 
         <p className="hud mt-3 hidden leading-relaxed lg:block">{t.archive.hint}</p>
       </div>

@@ -111,6 +111,14 @@ type UIDict = {
     manageText: string;
     manageButton: string;
   };
+  island: { status: string; build: string; signIn: string; cta: string; menu: string };
+  hero3d: {
+    badgeA: string;
+    badgeB: string;
+    headline: [string, string, string];
+    cardsOverline: string;
+    scroll: string;
+  };
   footer: { about: string; rights: string };
   errors: Record<string, string>;
 };
@@ -279,6 +287,14 @@ const ui: Record<Locale, UIDict> = {
       manageTitle: 'Изменить решение',
       manageText: 'Можно пересмотреть выбор по cookie в любой момент — баннер появится снова.',
       manageButton: 'Открыть настройки cookie',
+    },
+    island: { status: 'BNSH на связи', build: 'BNSH OS 3089 · локальная память', signIn: 'Войти', cta: 'Обсудить проект', menu: 'Меню' },
+    hero3d: {
+      badgeA: 'Личный приём',
+      badgeB: 'BNSH OS 3089 · локальная память',
+      headline: ['BNSH — студия, которая', 'видит продукт целиком.', 'И спрашивает, прежде чем делать.'],
+      cardsOverline: 'Что я беру на себя',
+      scroll: 'Листайте',
     },
     footer: { about: 'Премиальная разработка сайтов и веб-приложений под задачу клиента. BNSH Production · Digital · Web Studio.', rights: 'Все права защищены.' },
     errors: {
@@ -451,6 +467,14 @@ const ui: Record<Locale, UIDict> = {
       manageText: 'You can revisit the cookie choice at any time — the banner comes back.',
       manageButton: 'Open cookie settings',
     },
+    island: { status: 'BNSH is listening', build: 'BNSH OS 3089 · on-device memory', signIn: 'Sign in', cta: 'Discuss a project', menu: 'Menu' },
+    hero3d: {
+      badgeA: 'Private intake',
+      badgeB: 'BNSH OS 3089 · on-device memory',
+      headline: ['BNSH is the studio that', 'sees the whole product.', 'It asks before it builds.'],
+      cardsOverline: 'What I take on',
+      scroll: 'Scroll',
+    },
     footer: { about: 'Premium websites and web apps built around the client’s task. BNSH Production · Digital · Web Studio.', rights: 'All rights reserved.' },
     errors: {
       name_required: 'Enter your name', name_short: 'Name is too short', name_long: 'Name is too long', name_letters: 'Letters only — no digits or symbols', name_real: 'Enter a real name',
@@ -621,6 +645,14 @@ const ui: Record<Locale, UIDict> = {
       manageTitle: 'Zmień decyzję',
       manageText: 'Wybór cookie możesz zmienić w każdej chwili — baner pojawi się ponownie.',
       manageButton: 'Otwórz ustawienia cookie',
+    },
+    island: { status: 'BNSH słucha', build: 'BNSH OS 3089 · pamięć lokalna', signIn: 'Zaloguj', cta: 'Omów projekt', menu: 'Menu' },
+    hero3d: {
+      badgeA: 'Prywatny nabór',
+      badgeB: 'BNSH OS 3089 · pamięć lokalna',
+      headline: ['BNSH to studio, które', 'widzi cały produkt.', 'Pyta, zanim zacznie.'],
+      cardsOverline: 'Co biorę na siebie',
+      scroll: 'Przewiń',
     },
     footer: { about: 'Premium strony i aplikacje web budowane pod zadanie klienta. BNSH Production · Digital · Web Studio.', rights: 'Wszelkie prawa zastrzeżone.' },
     errors: {

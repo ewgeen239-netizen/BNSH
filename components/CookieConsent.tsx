@@ -48,7 +48,7 @@ export function CookieConsent() {
         shown ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0',
       )}
     >
-      <div className="notch relative border border-white/12 bg-ink-900/95 p-4 shadow-panel backdrop-blur-xl sm:p-5">
+      <div className="rounded-2xl relative border border-white/12 bg-ink-900/95 p-4 shadow-panel backdrop-blur-xl sm:p-5">
         <span
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neon to-transparent"
@@ -111,7 +111,7 @@ export function CookieConsent() {
                   aria-hidden="true"
                   className={cn(
                     'absolute top-[3px] h-3 w-3 transition-all duration-300 ease-premium',
-                    analytics ? 'left-[23px] bg-neon shadow-[0_0_10px_rgba(40,224,240,0.8)]' : 'left-[3px] bg-silver/60',
+                    analytics ? 'left-[23px] bg-neon shadow-[0_0_10px_rgba(201,164,255,0.8)]' : 'left-[3px] bg-silver/60',
                   )}
                 />
               </button>
@@ -122,13 +122,13 @@ export function CookieConsent() {
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <button
             onClick={() => accept(open ? analytics : true)}
-            className="notch-sm inline-flex items-center bg-neon px-4 py-2.5 font-mono text-[10px] uppercase tracking-hud text-ink-950 transition-colors duration-300 hover:bg-neon-soft focus-ring"
+            className="rounded-full inline-flex items-center bg-neon px-4 py-2.5 font-mono text-[10px] uppercase tracking-hud text-ink-950 transition-colors duration-300 hover:bg-neon-soft focus-ring"
           >
             {open ? t.consent.save : t.consent.acceptAll}
           </button>
           <button
             onClick={() => accept(false)}
-            className="notch-sm inline-flex items-center border border-white/15 px-4 py-2.5 font-mono text-[10px] uppercase tracking-hud text-silver transition-colors duration-300 hover:border-white/30 hover:text-platinum focus-ring"
+            className="rounded-full inline-flex items-center border border-white/15 px-4 py-2.5 font-mono text-[10px] uppercase tracking-hud text-silver transition-colors duration-300 hover:border-white/30 hover:text-platinum focus-ring"
           >
             {t.consent.essentialOnly}
           </button>

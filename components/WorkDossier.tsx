@@ -131,7 +131,7 @@ function DossierBlock({
 
             {/* a small, treated screen of the project */}
             {work.image && (
-              <div className="notch relative mt-6 aspect-[16/10] w-full max-w-sm overflow-hidden border border-white/[0.08] bg-ink-900">
+              <div className="rounded-2xl relative mt-6 aspect-[16/10] w-full max-w-sm overflow-hidden border border-white/[0.08] bg-ink-900">
                 <Image
                   src={work.image}
                   alt={`${work.title} — ${work.type}`}
@@ -159,7 +159,7 @@ function DossierBlock({
                   href={work.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="notch-sm ml-auto inline-flex items-center gap-2 border border-white/15 px-4 py-2 font-mono text-[10px] uppercase tracking-hud text-platinum transition-colors duration-300 hover:border-[color:var(--a)] hover:text-white focus-ring"
+                  className="rounded-full ml-auto inline-flex items-center gap-2 border border-white/15 px-4 py-2 font-mono text-[10px] uppercase tracking-hud text-platinum transition-colors duration-300 hover:border-[color:var(--a)] hover:text-white focus-ring"
                 >
                   {t.archive.openLive}
                   <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.5} />
@@ -181,7 +181,7 @@ function DossierBlock({
                   {/* the marker lights up and slides on hover */}
                   <span
                     aria-hidden="true"
-                    className="mt-[7px] h-1.5 w-1.5 shrink-0 transition-all duration-300 group-hover/row:translate-x-0.5"
+                    className="mt-[7px] h-1.5 w-1.5 rounded-full shrink-0 transition-all duration-300 group-hover/row:translate-x-0.5"
                     style={{ background: accent, opacity: 0.55 }}
                   />
                   <span className="min-w-0 flex-1 text-sm leading-relaxed text-silver/75 transition-colors duration-300 group-hover/row:text-platinum">

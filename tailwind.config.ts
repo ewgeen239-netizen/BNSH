@@ -19,7 +19,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // The void — blue-shifted blacks
+        // The void — blue-shifted blacks, as before the hero restyle
         ink: {
           950: '#04060A',
           900: '#070A10',
@@ -28,31 +28,43 @@ const config: Config = {
           700: '#141A24',
           600: '#1C2430',
         },
-        // Cold chrome neutrals
-        platinum: '#E6F1F5',
-        silver: '#A6B6C2',
-        muted: '#74848F',
-        faint: '#4A5762',
-        // The one live colour
+        // Warm-neutral text ramp
+        platinum: '#EDEDF2',
+        silver: '#AFAFBA',
+        muted: '#7E7E8C',
+        faint: '#55555F',
+        // The accent: the same lavender the bust's head is made of.
+        // (Named `neon` throughout the UI — the hue changed, the role did not.)
         neon: {
-          DEFAULT: '#28E0F0',
-          soft: '#7FF0FA',
-          deep: '#0C8A99',
+          DEFAULT: '#C9A4FF',
+          soft: '#E4D2FF',
+          deep: '#8B5CF6',
         },
-        // Alarm / secondary signal — used sparingly
+        // Secondary signal — the amber of the bust's shoulders
         flux: {
-          DEFAULT: '#FF3D8A',
-          soft: '#FF86B4',
+          DEFAULT: '#F0A92E',
+          soft: '#F8C96B',
         },
         electric: {
           DEFAULT: '#5B8DEF',
           soft: '#8FB2F5',
+        },
+        // Hero palette — the particle bust and the island header's CTA
+        acid: '#E2F952',
+        lavender: {
+          DEFAULT: '#C9A4FF',
+          soft: '#E4D2FF',
+        },
+        amber: {
+          DEFAULT: '#F0A92E',
+          soft: '#F8C96B',
         },
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
         display: ['var(--font-display)', 'var(--font-sans)', 'sans-serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+        pixel: ['var(--font-pixel)', 'var(--font-mono)', 'monospace'],
       },
       fontSize: {
         'display-xl': ['clamp(3rem, 9vw, 7.5rem)', { lineHeight: '0.92', letterSpacing: '-0.04em' }],
@@ -69,19 +81,19 @@ const config: Config = {
         prose: '68ch',
       },
       borderRadius: {
-        // 3089 hardware is machined, not rounded — radii stay tight on purpose
-        DEFAULT: '2px',
-        md: '3px',
-        lg: '4px',
-        xl: '6px',
-        '2xl': '8px',
-        '3xl': '12px',
+        // Soft, premium hardware: the island header sets the tone
+        DEFAULT: '8px',
+        md: '10px',
+        lg: '12px',
+        xl: '16px',
+        '2xl': '20px',
+        '3xl': '28px',
       },
       boxShadow: {
         panel: '0 1px 0 0 rgba(255,255,255,0.05) inset, 0 30px 80px -30px rgba(0,0,0,0.95)',
-        neon: '0 0 0 1px rgba(40,224,240,0.35), 0 0 40px -10px rgba(40,224,240,0.45)',
-        'neon-soft': '0 0 24px -8px rgba(40,224,240,0.4)',
-        flux: '0 0 0 1px rgba(255,61,138,0.35), 0 0 40px -12px rgba(255,61,138,0.4)',
+        neon: '0 0 0 1px rgba(201,164,255,0.35), 0 0 40px -10px rgba(201,164,255,0.45)',
+        'neon-soft': '0 0 24px -8px rgba(201,164,255,0.4)',
+        flux: '0 0 0 1px rgba(240,169,46,0.35), 0 0 40px -12px rgba(240,169,46,0.4)',
       },
       backgroundImage: {
         'grid-faint':

@@ -101,7 +101,7 @@ export function PrivacyContent() {
 
         {/* consent control */}
         <Reveal>
-          <section className="notch mt-10 border border-white/[0.09] bg-ink-900/60 p-5 sm:p-6">
+          <section className="rounded-2xl mt-10 border border-white/[0.09] bg-ink-900/60 p-5 sm:p-6">
             <h2 className="font-mono text-sm uppercase tracking-[0.12em] text-platinum">
               {t.privacy.manageTitle}
             </h2>
@@ -120,7 +120,7 @@ export function PrivacyContent() {
             )}
             <button
               onClick={reset}
-              className="notch-sm mt-5 inline-flex items-center border border-neon/40 bg-neon/[0.07] px-4 py-2.5 font-mono text-[10px] uppercase tracking-hud text-neon-soft transition-colors duration-300 hover:bg-neon/[0.14] focus-ring"
+              className="rounded-full mt-5 inline-flex items-center border border-neon/40 bg-neon/[0.07] px-4 py-2.5 font-mono text-[10px] uppercase tracking-hud text-neon-soft transition-colors duration-300 hover:bg-neon/[0.14] focus-ring"
             >
               {t.privacy.manageButton}
             </button>

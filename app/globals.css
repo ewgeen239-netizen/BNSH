@@ -43,7 +43,7 @@
   }
 
   ::selection {
-    background: rgba(40, 224, 240, 0.28);
+    background: rgba(201, 164, 255, 0.3);
     color: #fff;
   }
 
@@ -56,11 +56,12 @@
     background: #04060a;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1c2430;
+    background: #26262e;
     border: 2px solid #04060a;
+    border-radius: 999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(40, 224, 240, 0.45);
+    background: rgba(201, 164, 255, 0.5);
   }
 }
 
@@ -72,7 +73,7 @@
 
   /* Cold chrome text for headings */
   .text-gradient-platinum {
-    background: linear-gradient(180deg, #ffffff 0%, #cfdee6 42%, #74848f 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #dedee6 42%, #7e7e8c 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -80,16 +81,16 @@
   }
 
   .text-gradient-neon {
-    background: linear-gradient(180deg, #a8f6fd 0%, #28e0f0 55%, #0c8a99 100%);
+    background: linear-gradient(180deg, #e4d2ff 0%, #c9a4ff 55%, #8b5cf6 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
 
-  /* Flat machined surface — replaces the old frosted glass */
+  /* The island header's surface, reused everywhere */
   .panel {
-    @apply border border-white/[0.07] bg-ink-900/70 backdrop-blur-sm;
+    @apply rounded-2xl border border-white/10 bg-ink-900/70 backdrop-blur-md;
   }
 
   /* Monospaced HUD caption used all over the interface */
@@ -145,17 +146,8 @@
   .glitch-text:hover,
   .glitch-text[data-glitch='1'] {
     text-shadow:
-      -1.5px 0 0 rgba(255, 61, 138, 0.75),
-      1.5px 0 0 rgba(40, 224, 240, 0.75);
-  }
-
-  /* Clipped corner — a notched panel, reads as machined plating */
-  .notch {
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-  }
-
-  .notch-sm {
-    clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 0 100%);
+      -1.5px 0 0 rgba(240, 169, 46, 0.7),
+      1.5px 0 0 rgba(201, 164, 255, 0.75);
   }
 
   .no-scrollbar {

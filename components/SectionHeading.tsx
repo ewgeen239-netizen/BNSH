@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 export function Overline({ children }: { children: ReactNode }) {
   return (
     <span className="inline-flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-hud text-neon-soft/80">
-      <span className="h-1 w-1 bg-neon animate-pulse-dot" aria-hidden="true" />
+      <span className="h-1 w-1 rounded-full bg-neon animate-pulse-dot" aria-hidden="true" />
       <span className="h-px w-5 bg-neon/40" aria-hidden="true" />
       {children}
     </span>

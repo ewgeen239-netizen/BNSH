@@ -52,7 +52,7 @@ export function SelectedWorks() {
                 >
                   <span
                     className={cn(
-                      'h-1 w-1 transition-colors duration-300',
+                      'h-1 w-1 rounded-full transition-colors duration-300',
                       active ? 'bg-neon-soft' : 'bg-white/20 group-hover:bg-white/40',
                     )}
                   />

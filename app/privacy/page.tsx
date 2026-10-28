@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Header } from '@/components/Header';
+import { IslandHeader } from '@/components/hero/IslandHeader';
 import { Footer } from '@/components/Footer';
 import { PrivacyContent } from '@/components/PrivacyContent';
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <Header />
+      <IslandHeader />
       <PrivacyContent />
       <Footer />
     </>

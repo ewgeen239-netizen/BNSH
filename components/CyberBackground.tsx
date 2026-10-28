@@ -23,8 +23,8 @@ export function CyberBackground({
       <div className="absolute inset-0 bg-ink-950" />
 
       {/* two cold blooms, slowly drifting */}
-      <div className="absolute left-1/2 top-[-14%] h-[52vw] w-[52vw] -translate-x-1/2 bg-[radial-gradient(circle,rgba(40,224,240,0.13),transparent_62%)] blur-3xl animate-drift" />
-      <div className="absolute right-[-12%] top-[26%] h-[40vw] w-[40vw] bg-[radial-gradient(circle,rgba(255,61,138,0.07),transparent_60%)] blur-3xl animate-drift [animation-delay:-9s]" />
+      <div className="absolute left-1/2 top-[-14%] h-[52vw] w-[52vw] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(40,224,240,0.13),transparent_62%)] blur-3xl animate-drift" />
+      <div className="absolute right-[-12%] top-[26%] h-[40vw] w-[40vw] rounded-full bg-[radial-gradient(circle,rgba(255,61,138,0.07),transparent_60%)] blur-3xl animate-drift [animation-delay:-9s]" />
 
       {/* flat grid over the whole plane */}
       <div className="absolute inset-0 bg-grid-faint bg-[size:72px_72px] [mask-image:radial-gradient(75%_60%_at_50%_25%,black,transparent)]" />
