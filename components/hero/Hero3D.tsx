@@ -110,7 +110,9 @@ export function Hero3D() {
           }}
         >
           <div className="mx-auto max-w-content">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-ink-900/70 px-3 py-1.5 text-[11px] text-silver/80 backdrop-blur-md">
+            {/* On a phone this pill wraps to the full width of the screen and
+                fights the headline, so it only appears from sm up. */}
+            <span className="hidden items-center gap-2 rounded-full border border-white/10 bg-ink-900/70 px-3 py-1.5 text-[11px] text-silver/80 backdrop-blur-md sm:inline-flex">
               <span className="h-1.5 w-1.5 rounded-full bg-lavender" />
               {t.hero3d.badgeA}
               <span aria-hidden="true" className="h-3 w-px bg-white/15" />
@@ -119,7 +121,7 @@ export function Hero3D() {
               </span>
             </span>
 
-            <h1 className="mt-5 max-w-2xl font-display text-[clamp(1.9rem,4.6vw,3.4rem)] font-bold leading-[1.08] tracking-tightest text-platinum">
+            <h1 className="max-w-2xl font-display sm:mt-5 text-[clamp(1.9rem,4.6vw,3.4rem)] font-bold leading-[1.08] tracking-tightest text-platinum">
               {t.hero3d.headline[0]}
               <br />
               {t.hero3d.headline[1]}
