@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowRight } from 'lucide-react';
-import { ParticleBust, HERO_SCROLL_VH } from './ParticleBust';
+import { PixelGuardian } from '../PixelGuardian';
 import { CyberBackground } from '../CyberBackground';
 import { works } from '@/lib/content';
 import { scrollToId, cn } from '@/lib/utils';
@@ -19,11 +19,17 @@ import { useT } from '@/lib/i18n';
  *   0.34 – 1.00  the bust turns to three-quarter profile and slides right,
  *                while the capability cards come in on the left third
  *
- * The 3D itself (camera, rotation, scale) is driven inside ParticleBust from
- * the same scroll position; only the DOM layers are driven from here.
+ * The figure itself is the pixel guardian, which tracks the pointer on its
+ * own; the stage only slides and scales it as the scroll advances.
  */
 
+/** How far down the page the hero choreography runs, in viewport heights. */
+export const HERO_SCROLL_VH = 2.4;
+
 const liveCount = works.filter((w) => w.live).length;
+
+/** Ease in-out, used to pace the figure's move across the stage. */
+const easeInOut = (x: number) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
 
 export function Hero3D() {
   const t = useT();
@@ -55,6 +61,8 @@ export function Hero3D() {
   const out = clamp01((p - 0.26) / 0.12);
   /** cards: start arriving before the headline has fully cleared */
   const inCards = clamp01((p - 0.34) / 0.16);
+  /** the figure's slide to the right, clearing the left third for the cards */
+  const shift = easeInOut(clamp01((p - 0.26) / 0.5));
 
   return (
     <section id="hero" className="relative" style={{ height: `${HERO_SCROLL_VH * 100}svh` }}>
@@ -74,8 +82,23 @@ export function Hero3D() {
           </span>
         </div>
 
-        {/* --- the bust --- */}
-        <ParticleBust className="absolute inset-0 z-10" />
+        {/* --- the watcher ---
+            It is drawn centred inside its own element, so the stage move is a
+            transform on the wrapper rather than anything the canvas knows. */}
+        {/* The outer element holds the resting offset (the figure stands to
+            the right of the copy on a wide screen); the inner one carries the
+            scroll move, so the two never fight over one transform. */}
+        <div className="absolute inset-0 z-10 md:translate-x-[15%]">
+          <div
+            className="absolute inset-0"
+            style={{
+              transform: `translateX(${shift * 20}%) scale(${1 + shift * 0.07})`,
+              transition: 'transform 140ms linear',
+            }}
+          >
+            <PixelGuardian className="absolute inset-0" />
+          </div>
+        </div>
 
         {/* --- first beat: the headline, bottom-left --- */}
         <div
