@@ -18,8 +18,8 @@ export default function OpengraphImage() {
           justifyContent: 'space-between',
           padding: '80px',
           background:
-            'radial-gradient(60% 60% at 50% 0%, #12162a 0%, #050505 60%)',
-          color: '#E7E7E9',
+            'radial-gradient(60% 60% at 50% 0%, #1a1430 0%, #04060A 60%)',
+          color: '#EDEDF2',
           fontFamily: 'sans-serif',
         }}
       >
@@ -29,7 +29,7 @@ export default function OpengraphImage() {
               width: 56,
               height: 56,
               borderRadius: 14,
-              border: '1px solid rgba(255,255,255,0.14)',
+              border: '1px solid rgba(201,164,255,0.35)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -48,14 +48,14 @@ export default function OpengraphImage() {
           <div style={{ fontSize: 78, fontWeight: 700, lineHeight: 1.05, maxWidth: 900 }}>
             Premium websites &amp; digital products
           </div>
-          <div style={{ fontSize: 34, color: '#B9BAC0', maxWidth: 820 }}>
+          <div style={{ fontSize: 34, color: '#AFAFBA', maxWidth: 820 }}>
             Сайты, лендинги и веб-приложения для бизнеса, экспертов и личных брендов.
           </div>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 26, color: '#8A8B92' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 26, color: '#7E7E8C' }}>
           <span>{siteConfig.url.replace('https://', '')}</span>
-          <span style={{ color: '#C6A15B' }}>Digital craft · precision</span>
+          <span style={{ color: '#C9A4FF' }}>Digital craft · precision</span>
         </div>
       </div>
     ),
