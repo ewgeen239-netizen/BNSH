@@ -20,14 +20,14 @@ export function PricingCard({ plan, className }: { plan: Plan; className?: strin
         'relative flex flex-col overflow-hidden rounded-3xl border p-6 sm:p-8',
         className,
         plan.featured
-          ? 'border-gold/30 bg-gradient-to-b from-white/[0.06] to-white/[0.02] shadow-gold'
-          : 'border-white/[0.08] bg-white/[0.02] shadow-glass hover:border-white/[0.16]',
+          ? 'border-neon/30 bg-gradient-to-b from-white/[0.06] to-white/[0.02] shadow-neon'
+          : 'border-white/[0.08] bg-white/[0.02] shadow-panel hover:border-white/[0.16]',
       )}
     >
       {plan.featured && (
         <>
-          <div className="absolute -right-20 -top-20 h-52 w-52 rounded-full bg-[radial-gradient(circle,rgba(198,161,91,0.22),transparent_60%)] blur-2xl" />
-          <span className="absolute right-6 top-6 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-gold-soft">
+          <div className="absolute -right-20 -top-20 h-52 w-52 bg-[radial-gradient(circle,rgba(198,161,91,0.22),transparent_60%)] blur-2xl" />
+          <span className="absolute right-6 top-6 border border-neon/30 bg-neon/10 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-neon-soft">
             {t.pricing.popular}
           </span>
         </>
@@ -41,9 +41,9 @@ export function PricingCard({ plan, className }: { plan: Plan; className?: strin
       <div className="mt-4 sm:mt-6">
         <span
           className={cn(
-            'inline-flex items-center rounded-full border px-3.5 py-1.5 text-sm font-medium',
+            'inline-flex items-center border px-3.5 py-1.5 text-sm font-medium',
             plan.featured
-              ? 'border-gold/30 bg-gold/[0.08] text-gold-soft'
+              ? 'border-neon/30 bg-neon/[0.08] text-neon-soft'
               : 'border-white/12 bg-white/[0.03] text-platinum',
           )}
         >
@@ -57,7 +57,7 @@ export function PricingCard({ plan, className }: { plan: Plan; className?: strin
             <span
               className={cn(
                 'mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full',
-                plan.featured ? 'bg-gold/15 text-gold-soft' : 'bg-white/[0.05] text-silver',
+                plan.featured ? 'bg-neon/15 text-neon-soft' : 'bg-white/[0.05] text-silver',
               )}
             >
               <Check className="h-3 w-3" strokeWidth={2.5} />
@@ -70,10 +70,10 @@ export function PricingCard({ plan, className }: { plan: Plan; className?: strin
       <button
         onClick={() => scrollToId('contact')}
         className={cn(
-          'mt-6 w-full rounded-full px-5 py-3 text-sm font-semibold transition focus-ring sm:mt-8',
+          'mt-6 w-full px-5 py-3 text-sm font-semibold transition focus-ring sm:mt-8',
           plan.featured
             ? 'bg-platinum text-ink-950 hover:bg-white'
-            : 'border border-white/12 bg-white/[0.03] text-platinum hover:border-gold/40 hover:bg-white/[0.06]',
+            : 'border border-white/12 bg-white/[0.03] text-platinum hover:border-neon/40 hover:bg-white/[0.06]',
         )}
       >
         {t.common.discuss}

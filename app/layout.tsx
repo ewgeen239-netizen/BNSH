@@ -1,9 +1,13 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Instrument_Serif } from 'next/font/google';
-import { Analytics } from '@vercel/analytics/next';
+import { Inter, Unbounded, JetBrains_Mono } from 'next/font/google';
 import { siteConfig } from '@/lib/site';
 import { LanguageProvider } from '@/lib/i18n';
+import { ConsentProvider } from '@/lib/consent';
 import { ScrollTop } from '@/components/ScrollTop';
+import { BootSequence } from '@/components/BootSequence';
+import { HudFrame } from '@/components/HudFrame';
+import { CookieConsent } from '@/components/CookieConsent';
+import { AnalyticsGate } from '@/components/AnalyticsGate';
 import './globals.css';
 
 const sans = Inter({
@@ -12,16 +16,23 @@ const sans = Inter({
   display: 'swap',
 });
 
-const display = Instrument_Serif({
-  weight: '400',
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
+// Geometric display face with Cyrillic — the 3089 wordmark voice.
+const display = Unbounded({
+  weight: ['400', '700', '800'],
+  subsets: ['latin', 'cyrillic'],
   variable: '--font-display',
   display: 'swap',
 });
 
+// Every label, readout and HUD caption on the site is set in this.
+const mono = JetBrains_Mono({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
 export const viewport: Viewport = {
-  themeColor: '#050505',
+  themeColor: '#04060A',
   width: 'device-width',
   initialScale: 1,
 };
@@ -101,7 +112,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="ru" className={`${sans.variable} ${display.variable}`}>
+    <html lang="ru" className={`${sans.variable} ${display.variable} ${mono.variable}`}>
       <body>
         {/* Disable native scroll restoration before first paint so a refresh
             always starts at the top instead of the previous position. */}
@@ -112,8 +123,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <ScrollTop />
-        <LanguageProvider>{children}</LanguageProvider>
-        <Analytics />
+        <ConsentProvider>
+          <LanguageProvider>
+            <BootSequence />
+            <HudFrame />
+            {children}
+            <CookieConsent />
+          </LanguageProvider>
+          <AnalyticsGate />
+        </ConsentProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

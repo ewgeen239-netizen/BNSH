@@ -38,7 +38,7 @@ export function Pricing() {
 
         <Reveal delay={0.1}>
           <div className="mx-auto mt-8 flex max-w-2xl items-start gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 text-sm text-silver/70 sm:mt-10 sm:p-5">
-            <Info className="mt-0.5 h-4 w-4 shrink-0 text-gold-soft/80" strokeWidth={1.75} />
+            <Info className="mt-0.5 h-4 w-4 shrink-0 text-neon-soft/80" strokeWidth={1.75} />
             <p>{t.pricing.note}</p>
           </div>
         </Reveal>

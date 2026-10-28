@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import {
   works as baseWorks,
+  dossiers as baseDossiers,
   services as baseServices,
   plans as basePlans,
   advantages as baseAdvantages,
@@ -12,6 +13,7 @@ import {
   type Plan,
   type Advantage,
   type Step,
+  type Dossier,
 } from './content';
 
 export type Locale = 'ru' | 'en' | 'pl';
@@ -61,6 +63,53 @@ type UIDict = {
       successTitle: string; successText: string; successAgain: string;
       errorGeneric: string;
     };
+  };
+  hud: { sys: string; archive: string; uplink: string; node: string; year: string; scrollCue: string };
+  boot: { tag: string; lines: string[]; decrypt: string; ready: string; skip: string; enter: string };
+  archive: {
+    overline: string;
+    hint: string;
+    indexLabel: string;
+    dossierOverline: string;
+    dossierTitle: string;
+    dossierIntro: string;
+    builtIn: string;
+    roleLabel: string;
+    stackLabel: string;
+    openLive: string;
+    previewHint: string;
+    noPreview: string;
+    liveCount: string;
+  };
+  consent: {
+    tag: string;
+    title: string;
+    text: string;
+    acceptAll: string;
+    essentialOnly: string;
+    customize: string;
+    save: string;
+    necessaryLabel: string;
+    necessaryText: string;
+    analyticsLabel: string;
+    analyticsText: string;
+    always: string;
+    policyLink: string;
+    manage: string;
+    decidedAt: string;
+  };
+  privacy: {
+    tag: string;
+    title: string;
+    intro: string;
+    updated: string;
+    back: string;
+    sections: { h: string; p: string[] }[];
+    cookieTableTitle: string;
+    cookieTable: { name: string; purpose: string; life: string; group: string }[];
+    manageTitle: string;
+    manageText: string;
+    manageButton: string;
   };
   footer: { about: string; rights: string };
   errors: Record<string, string>;
@@ -115,6 +164,121 @@ const ui: Record<Locale, UIDict> = {
         successTitle: 'Заявка отправлена', successText: 'Спасибо! Я свяжусь с вами в ближайшее время и предложу лучший формат под задачу.', successAgain: 'Отправить ещё одну',
         errorGeneric: 'Не удалось отправить. Попробуйте ещё раз или напишите в Telegram.',
       },
+    },
+    hud: { sys: 'BNSH // SYS', archive: 'АРХИВ', uplink: 'КАНАЛ', node: 'УЗЕЛ PL-SZZ', year: '3089', scrollCue: 'Листайте вниз' },
+    boot: {
+      tag: 'ИНИЦИАЛИЗАЦИЯ',
+      lines: [
+        'связь с узлом PL-SZZ установлена',
+        'расшифровка архива портфолио',
+        'загрузка визуального слоя 3089',
+        'проверка целостности проектов',
+        'интерфейс готов',
+      ],
+      decrypt: 'РАСШИФРОВКА',
+      ready: 'СИСТЕМА ГОТОВА',
+      skip: 'Пропустить',
+      enter: 'Войти в архив',
+    },
+    archive: {
+      overline: 'Архив работ',
+      hint: 'Наведите или выберите проект — слева индекс, справа живой экран',
+      indexLabel: 'Индекс',
+      dossierOverline: 'Разбор проектов',
+      dossierTitle: 'Что именно сделано внутри',
+      dossierIntro:
+        'Ниже — по каждому проекту: задача, что собрано внутри и моя роль. Наведите на название проекта в тексте — увидите его экран.',
+      builtIn: 'Собрано внутри',
+      roleLabel: 'Моя роль',
+      stackLabel: 'Стек',
+      openLive: 'Открыть проект',
+      previewHint: 'наведите для превью',
+      noPreview: 'Экрана нет — проект живёт в Telegram',
+      liveCount: 'проектов в работе',
+    },
+    consent: {
+      tag: 'ЗАПРОС ДОСТУПА',
+      title: 'Файлы cookie',
+      text:
+        'Сайт использует только необходимые cookie, чтобы работать. Аналитику подключаю лишь с вашего согласия — чтобы видеть, какие работы смотрят.',
+      acceptAll: 'Принять всё',
+      essentialOnly: 'Только необходимые',
+      customize: 'Настроить',
+      save: 'Сохранить выбор',
+      necessaryLabel: 'Необходимые',
+      necessaryText: 'Выбор языка, запись о согласии, состояние интерфейса. Без них сайт не работает.',
+      analyticsLabel: 'Аналитика',
+      analyticsText: 'Обезличенная статистика посещений (Vercel Analytics). Загружается только после согласия.',
+      always: 'всегда включены',
+      policyLink: 'Политика приватности и RODO',
+      manage: 'Настройки cookie',
+      decidedAt: 'Решение сохранено',
+    },
+    privacy: {
+      tag: 'ПРАВОВОЙ СЛОЙ',
+      title: 'Приватность, cookie и RODO',
+      intro:
+        'Коротко и без юридического тумана: какие данные я получаю, зачем они нужны, сколько хранятся и как их удалить.',
+      updated: 'Обновлено',
+      back: 'На главную',
+      sections: [
+        {
+          h: 'Кто обрабатывает данные',
+          p: [
+            'Администратор данных — BNSH Studio (частная практика, Польша). Связь: ewgeen239@gmail.com или Telegram @ewgeess.',
+            'Я работаю один: ваши данные не передаются отделу продаж, подрядчикам или рекламным сетям, потому что их нет.',
+          ],
+        },
+        {
+          h: 'Какие данные и зачем',
+          p: [
+            'Форма заявки: имя, контакт (email, телефон или Telegram), тип проекта и описание задачи. Нужны только для того, чтобы ответить и предложить формат работы.',
+            'Технические данные: обезличенная статистика визитов, если вы дали согласие на аналитику. Без IP-профилирования и без рекламных трекеров.',
+            'Правовая основа (ст. 6 RODO/GDPR): ответ на заявку — ч. 1 п. b (подготовка договора), аналитика — ч. 1 п. a (согласие), базовая безопасность сайта — ч. 1 п. f (законный интерес).',
+          ],
+        },
+        {
+          h: 'Сколько храню',
+          p: [
+            'Переписку по заявке — до 12 месяцев после последнего сообщения, затем удаляю.',
+            'Запись о согласии на cookie — 12 месяцев, после чего спрашиваю заново.',
+            'Статистику — в обезличенном виде, без привязки к человеку.',
+          ],
+        },
+        {
+          h: 'Кому передаю',
+          p: [
+            'Хостинг и доставка сайта — Vercel Inc. (включая Vercel Analytics при согласии).',
+            'Доставка писем с заявкой — Resend.',
+            'Оба сервиса работают на стандартных договорных условиях ЕС (SCC). Больше никому данные не передаются и не продаются.',
+          ],
+        },
+        {
+          h: 'Ваши права',
+          p: [
+            'Доступ к данным, исправление, удаление, ограничение обработки, перенос и возражение против обработки.',
+            'Отзыв согласия в любой момент — кнопкой «Настройки cookie» ниже или письмом. Отзыв не влияет на обработку до момента отзыва.',
+            'Жалоба в надзорный орган: Prezes Urzędu Ochrony Danych Osobowych (UODO), ul. Stawki 2, 00-193 Warszawa.',
+          ],
+        },
+        {
+          h: 'Безопасность',
+          p: [
+            'Передача данных только по HTTPS. Доступ к заявкам — у меня одного, с двухфакторной аутентификацией на почте.',
+            'Данные не используются для автоматического принятия решений и профилирования.',
+          ],
+        },
+      ],
+      cookieTableTitle: 'Что лежит в браузере',
+      cookieTable: [
+        { name: 'bnsh-locale', purpose: 'Запоминает выбранный язык', life: '12 месяцев', group: 'Необходимые' },
+        { name: 'bnsh-consent', purpose: 'Хранит ваш выбор по cookie', life: '12 месяцев', group: 'Необходимые' },
+        { name: 'bnsh-boot', purpose: 'Загрузочный экран один раз за сессию', life: 'сессия', group: 'Необходимые' },
+        { name: 'Vercel Analytics', purpose: 'Обезличенная статистика визитов', life: 'сессия', group: 'Аналитика' },
+      ],
+      manageTitle: 'Изменить решение',
+      manageText: 'Можно пересмотреть выбор по cookie в любой момент — баннер появится снова.',
+      manageButton: 'Открыть настройки cookie',
     },
     footer: { about: 'Премиальная разработка сайтов и веб-приложений под задачу клиента. BNSH Production · Digital · Web Studio.', rights: 'Все права защищены.' },
     errors: {
@@ -172,6 +336,121 @@ const ui: Record<Locale, UIDict> = {
         errorGeneric: 'Couldn’t send. Please try again or message me on Telegram.',
       },
     },
+    hud: { sys: 'BNSH // SYS', archive: 'ARCHIVE', uplink: 'UPLINK', node: 'NODE PL-SZZ', year: '3089', scrollCue: 'Scroll down' },
+    boot: {
+      tag: 'INITIALISING',
+      lines: [
+        'uplink to node PL-SZZ established',
+        'decrypting portfolio archive',
+        'loading 3089 visual layer',
+        'verifying project integrity',
+        'interface ready',
+      ],
+      decrypt: 'DECRYPTING',
+      ready: 'SYSTEM READY',
+      skip: 'Skip',
+      enter: 'Enter the archive',
+    },
+    archive: {
+      overline: 'Work archive',
+      hint: 'Hover or pick a project — index on the left, live screen on the right',
+      indexLabel: 'Index',
+      dossierOverline: 'Project breakdown',
+      dossierTitle: 'What was actually built inside',
+      dossierIntro:
+        'Per project: the task, what was built in, and my part in it. Hover a project name in the text to see its screen.',
+      builtIn: 'Built in',
+      roleLabel: 'My role',
+      stackLabel: 'Stack',
+      openLive: 'Open project',
+      previewHint: 'hover to preview',
+      noPreview: 'No screen — this one lives inside Telegram',
+      liveCount: 'projects live',
+    },
+    consent: {
+      tag: 'ACCESS REQUEST',
+      title: 'Cookies',
+      text:
+        'This site uses only the cookies it needs to work. Analytics load exclusively with your consent — so I can see which work gets looked at.',
+      acceptAll: 'Accept all',
+      essentialOnly: 'Essential only',
+      customize: 'Customise',
+      save: 'Save choice',
+      necessaryLabel: 'Necessary',
+      necessaryText: 'Language choice, the consent record, interface state. The site does not work without them.',
+      analyticsLabel: 'Analytics',
+      analyticsText: 'Anonymous visit statistics (Vercel Analytics). Loaded only after consent.',
+      always: 'always on',
+      policyLink: 'Privacy policy & GDPR',
+      manage: 'Cookie settings',
+      decidedAt: 'Choice stored',
+    },
+    privacy: {
+      tag: 'LEGAL LAYER',
+      title: 'Privacy, cookies & GDPR',
+      intro:
+        'Short and without legal fog: what data reaches me, why it is needed, how long it is kept and how to have it deleted.',
+      updated: 'Updated',
+      back: 'Back home',
+      sections: [
+        {
+          h: 'Who processes the data',
+          p: [
+            'The data controller is BNSH Studio (sole practitioner, Poland). Contact: ewgeen239@gmail.com or Telegram @ewgeess.',
+            'I work alone: your data is not handed to a sales team, subcontractors or ad networks, because there are none.',
+          ],
+        },
+        {
+          h: 'What data and why',
+          p: [
+            'Request form: name, contact (email, phone or Telegram), project type and a description of the task. Used only to reply and propose a format.',
+            'Technical data: anonymous visit statistics, if you consented to analytics. No IP profiling, no advertising trackers.',
+            'Legal basis (GDPR art. 6): replying to your request — 1(b) (pre-contractual steps), analytics — 1(a) (consent), basic site security — 1(f) (legitimate interest).',
+          ],
+        },
+        {
+          h: 'How long it is kept',
+          p: [
+            'Correspondence about a request — up to 12 months after the last message, then deleted.',
+            'The cookie consent record — 12 months, after which you are asked again.',
+            'Statistics — anonymous, never tied back to a person.',
+          ],
+        },
+        {
+          h: 'Who it is shared with',
+          p: [
+            'Hosting and delivery — Vercel Inc. (including Vercel Analytics when consented).',
+            'Delivery of request emails — Resend.',
+            'Both operate under standard EU contractual clauses (SCC). Nothing is shared with anyone else and nothing is sold.',
+          ],
+        },
+        {
+          h: 'Your rights',
+          p: [
+            'Access, rectification, erasure, restriction of processing, portability and objection.',
+            'You can withdraw consent at any time — via “Cookie settings” below or by email. Withdrawal does not affect processing done before it.',
+            'Complaint to the supervisory authority: President of the Personal Data Protection Office (UODO), ul. Stawki 2, 00-193 Warsaw, Poland.',
+          ],
+        },
+        {
+          h: 'Security',
+          p: [
+            'Data travels over HTTPS only. Requests are accessible to me alone, with two-factor authentication on the mailbox.',
+            'Your data is never used for automated decision-making or profiling.',
+          ],
+        },
+      ],
+      cookieTableTitle: 'What sits in your browser',
+      cookieTable: [
+        { name: 'bnsh-locale', purpose: 'Remembers the chosen language', life: '12 months', group: 'Necessary' },
+        { name: 'bnsh-consent', purpose: 'Stores your cookie choice', life: '12 months', group: 'Necessary' },
+        { name: 'bnsh-boot', purpose: 'Boot screen once per session', life: 'session', group: 'Necessary' },
+        { name: 'Vercel Analytics', purpose: 'Anonymous visit statistics', life: 'session', group: 'Analytics' },
+      ],
+      manageTitle: 'Change your mind',
+      manageText: 'You can revisit the cookie choice at any time — the banner comes back.',
+      manageButton: 'Open cookie settings',
+    },
     footer: { about: 'Premium websites and web apps built around the client’s task. BNSH Production · Digital · Web Studio.', rights: 'All rights reserved.' },
     errors: {
       name_required: 'Enter your name', name_short: 'Name is too short', name_long: 'Name is too long', name_letters: 'Letters only — no digits or symbols', name_real: 'Enter a real name',
@@ -227,6 +506,121 @@ const ui: Record<Locale, UIDict> = {
         successTitle: 'Zgłoszenie wysłane', successText: 'Dziękuję! Odezwę się wkrótce i zaproponuję najlepszy format pod Twoje zadanie.', successAgain: 'Wyślij kolejne',
         errorGeneric: 'Nie udało się wysłać. Spróbuj ponownie lub napisz na Telegramie.',
       },
+    },
+    hud: { sys: 'BNSH // SYS', archive: 'ARCHIWUM', uplink: 'ŁĄCZE', node: 'WĘZEŁ PL-SZZ', year: '3089', scrollCue: 'Przewiń w dół' },
+    boot: {
+      tag: 'INICJALIZACJA',
+      lines: [
+        'łącze z węzłem PL-SZZ ustanowione',
+        'odszyfrowywanie archiwum portfolio',
+        'ładowanie warstwy wizualnej 3089',
+        'weryfikacja spójności projektów',
+        'interfejs gotowy',
+      ],
+      decrypt: 'ODSZYFROWYWANIE',
+      ready: 'SYSTEM GOTOWY',
+      skip: 'Pomiń',
+      enter: 'Wejdź do archiwum',
+    },
+    archive: {
+      overline: 'Archiwum prac',
+      hint: 'Najedź lub wybierz projekt — indeks po lewej, żywy ekran po prawej',
+      indexLabel: 'Indeks',
+      dossierOverline: 'Rozbiór projektów',
+      dossierTitle: 'Co dokładnie zostało zbudowane',
+      dossierIntro:
+        'Dla każdego projektu: zadanie, co zostało w nim zbudowane i moja rola. Najedź na nazwę projektu w tekście, aby zobaczyć jego ekran.',
+      builtIn: 'Zbudowane w środku',
+      roleLabel: 'Moja rola',
+      stackLabel: 'Stack',
+      openLive: 'Otwórz projekt',
+      previewHint: 'najedź, by podejrzeć',
+      noPreview: 'Brak ekranu — ten projekt żyje w Telegramie',
+      liveCount: 'projektów działa',
+    },
+    consent: {
+      tag: 'ŻĄDANIE DOSTĘPU',
+      title: 'Pliki cookie',
+      text:
+        'Strona używa tylko niezbędnych cookie, aby działać. Analitykę włączam wyłącznie za Twoją zgodą — żeby wiedzieć, które prace są oglądane.',
+      acceptAll: 'Przyjmij wszystkie',
+      essentialOnly: 'Tylko niezbędne',
+      customize: 'Dostosuj',
+      save: 'Zapisz wybór',
+      necessaryLabel: 'Niezbędne',
+      necessaryText: 'Wybór języka, zapis zgody, stan interfejsu. Bez nich strona nie działa.',
+      analyticsLabel: 'Analityka',
+      analyticsText: 'Anonimowe statystyki wizyt (Vercel Analytics). Ładowane tylko po zgodzie.',
+      always: 'zawsze włączone',
+      policyLink: 'Polityka prywatności i RODO',
+      manage: 'Ustawienia cookie',
+      decidedAt: 'Wybór zapisany',
+    },
+    privacy: {
+      tag: 'WARSTWA PRAWNA',
+      title: 'Prywatność, cookie i RODO',
+      intro:
+        'Krótko i bez prawniczej mgły: jakie dane do mnie trafiają, po co są potrzebne, jak długo je trzymam i jak je usunąć.',
+      updated: 'Zaktualizowano',
+      back: 'Na stronę główną',
+      sections: [
+        {
+          h: 'Kto przetwarza dane',
+          p: [
+            'Administratorem danych jest BNSH Studio (działalność jednoosobowa, Polska). Kontakt: ewgeen239@gmail.com lub Telegram @ewgeess.',
+            'Pracuję sam: Twoje dane nie trafiają do działu sprzedaży, podwykonawców ani sieci reklamowych, bo takich nie ma.',
+          ],
+        },
+        {
+          h: 'Jakie dane i po co',
+          p: [
+            'Formularz zgłoszenia: imię, kontakt (e-mail, telefon lub Telegram), typ projektu i opis zadania. Służą wyłącznie do odpowiedzi i propozycji formatu współpracy.',
+            'Dane techniczne: anonimowe statystyki wizyt, jeśli wyrazisz zgodę na analitykę. Bez profilowania po IP i bez trackerów reklamowych.',
+            'Podstawa prawna (art. 6 RODO): odpowiedź na zgłoszenie — ust. 1 lit. b (czynności przed umową), analityka — ust. 1 lit. a (zgoda), podstawowe bezpieczeństwo strony — ust. 1 lit. f (uzasadniony interes).',
+          ],
+        },
+        {
+          h: 'Jak długo przechowuję',
+          p: [
+            'Korespondencję w sprawie zgłoszenia — do 12 miesięcy od ostatniej wiadomości, potem usuwam.',
+            'Zapis zgody na cookie — 12 miesięcy, następnie pytam ponownie.',
+            'Statystyki — w formie anonimowej, bez powiązania z osobą.',
+          ],
+        },
+        {
+          h: 'Komu przekazuję',
+          p: [
+            'Hosting i dostarczanie strony — Vercel Inc. (w tym Vercel Analytics przy zgodzie).',
+            'Dostarczanie e-maili ze zgłoszeniem — Resend.',
+            'Oba działają na standardowych klauzulach umownych UE (SCC). Nikomu innemu danych nie przekazuję i nie sprzedaję.',
+          ],
+        },
+        {
+          h: 'Twoje prawa',
+          p: [
+            'Dostęp do danych, sprostowanie, usunięcie, ograniczenie przetwarzania, przenoszenie i sprzeciw.',
+            'Zgodę możesz wycofać w każdej chwili — przyciskiem „Ustawienia cookie” poniżej lub mailem. Wycofanie nie wpływa na przetwarzanie sprzed wycofania.',
+            'Skarga do organu nadzorczego: Prezes Urzędu Ochrony Danych Osobowych (UODO), ul. Stawki 2, 00-193 Warszawa.',
+          ],
+        },
+        {
+          h: 'Bezpieczeństwo',
+          p: [
+            'Dane przesyłane są wyłącznie przez HTTPS. Dostęp do zgłoszeń mam tylko ja, z dwuetapowym uwierzytelnianiem na skrzynce.',
+            'Dane nie są używane do automatycznego podejmowania decyzji ani profilowania.',
+          ],
+        },
+      ],
+      cookieTableTitle: 'Co leży w przeglądarce',
+      cookieTable: [
+        { name: 'bnsh-locale', purpose: 'Pamięta wybrany język', life: '12 miesięcy', group: 'Niezbędne' },
+        { name: 'bnsh-consent', purpose: 'Przechowuje Twój wybór cookie', life: '12 miesięcy', group: 'Niezbędne' },
+        { name: 'bnsh-boot', purpose: 'Ekran startowy raz na sesję', life: 'sesja', group: 'Niezbędne' },
+        { name: 'Vercel Analytics', purpose: 'Anonimowe statystyki wizyt', life: 'sesja', group: 'Analityka' },
+      ],
+      manageTitle: 'Zmień decyzję',
+      manageText: 'Wybór cookie możesz zmienić w każdej chwili — baner pojawi się ponownie.',
+      manageButton: 'Otwórz ustawienia cookie',
     },
     footer: { about: 'Premium strony i aplikacje web budowane pod zadanie klienta. BNSH Production · Digital · Web Studio.', rights: 'Wszelkie prawa zastrzeżone.' },
     errors: {
@@ -386,6 +780,211 @@ export function getAdvantages(locale: Locale): Advantage[] {
 export function getSteps(locale: Locale): Step[] {
   if (locale === 'ru') return baseSteps;
   return baseSteps.map((s, i) => ({ ...s, ...stepsText[locale][i] }));
+}
+
+// Dossiers: the detail layer under the works stage, by slug.
+const dossiersText: Record<'en' | 'pl', Record<string, Dossier>> = {
+  en: {
+    balance: {
+      summary:
+        'A lounge bar in Szczecin: the site had to carry the mood of an evening there and take the booking load off the phone.',
+      details: [
+        'Cinematic hero with a mood video',
+        'Cocktail and shisha menu by category',
+        'Online table booking with a time picker',
+        'Four languages for a mixed local crowd',
+        'Map, opening hours and one-tap call',
+      ],
+      role: 'Design, build, i18n, deployment',
+    },
+    murmur: {
+      summary:
+        'An all-day restaurant on Chmielna in Warsaw: a showcase plus a living 150+ item menu the kitchen changes itself.',
+      details: [
+        '150+ item menu with search and filters',
+        'Table booking and an event enquiry',
+        'Separate cards: breakfast, lunch, bar',
+        'Cinematic plating and interior shots',
+        'Mobile speed tuned for street traffic',
+      ],
+      role: 'Structure, design, development',
+    },
+    'eleon-clinic': {
+      summary:
+        'An aesthetic medicine clinic in Warsaw: not a brochure but a working booking system with a doctors’ schedule.',
+      details: [
+        'Custom booking engine — no third-party service',
+        'Live doctor and slot availability',
+        'Admin panel: services, doctors, requests',
+        'Procedure cards with prices and prep',
+        'Confirmations and request notifications',
+      ],
+      role: 'UX scenarios, design, front end and booking logic',
+    },
+    brozone: {
+      summary:
+        'A Szczecin barbershop: the goal was a client booking themselves in four steps, with no back-and-forth chat.',
+      details: [
+        'Booking in 4 steps: service → barber → slot → confirm',
+        'Loyalty program that counts visits',
+        'BROZONE OS admin panel for shifts and slots',
+        'Barber profiles with their free hours',
+        'Multilingual for the city',
+      ],
+      role: 'Product, design, development, admin panel',
+    },
+    'your-flowers': {
+      summary:
+        'A florist in Szczecin: same-day delivery is the whole business, so the interface is built around the cut-off.',
+      details: [
+        'Bouquet picking by occasion, date and budget',
+        'Same-day delivery cut-off with a countdown',
+        'Order builder with a card and a time window',
+        'Catalog with categories and availability',
+        'Checkout without extra steps',
+      ],
+      role: 'UX, design, development, e-commerce logic',
+    },
+    krasnovska: {
+      summary:
+        'A personal-brand site: the task was to make an expert look premium and composed, with no noise.',
+      details: [
+        'Calm, premium typography',
+        'Portfolio of work and a studio story',
+        'Services block with clear formats',
+        'Three languages with a remembered choice',
+        'Photography first, lots of air between blocks',
+      ],
+      role: 'Design, build, i18n',
+    },
+    technokomis: {
+      summary:
+        'A Telegram bot that takes electronics on consignment: request, pricing and notifications — with no server of its own.',
+      details: [
+        'The whole request runs inside Telegram',
+        'Commission and indicative price calculation',
+        'Owner notified on every new request',
+        'Serverless webhook — you pay per request',
+        'Dialog state kept without losing context',
+      ],
+      role: 'Bot logic, integration, deployment',
+    },
+    sushi: {
+      summary:
+        'Sushi delivery in Szczecin: an order has to be placed in a couple of minutes on a phone, one-handed.',
+      details: [
+        'Menu and cart with instant add',
+        'Promo codes and delivery pricing',
+        'Loyalty club with bonuses per order',
+        'Checkout with the fewest possible fields',
+        'Layout tuned for one-handed ordering',
+      ],
+      role: 'Design, front end, cart and checkout',
+    },
+  },
+  pl: {
+    balance: {
+      summary:
+        'Lounge bar w Szczecinie: strona miała przenosić klimat wieczoru i zdjąć rezerwacje z telefonu.',
+      details: [
+        'Filmowy hero z klimatycznym wideo',
+        'Menu koktajli i shishy w kategoriach',
+        'Rezerwacja stolika online z wyborem godziny',
+        'Cztery języki pod lokalną publikę',
+        'Mapa, godziny otwarcia i szybki telefon',
+      ],
+      role: 'Design, kod, i18n, wdrożenie',
+    },
+    murmur: {
+      summary:
+        'All-day restauracja na Chmielnej w Warszawie: witryna plus żywe menu na 150+ pozycji, które kuchnia zmienia sama.',
+      details: [
+        'Menu na 150+ pozycji z wyszukiwarką i filtrami',
+        'Rezerwacja stolika i zapytanie o event',
+        'Osobne karty: śniadania, lunch, bar',
+        'Filmowe zdjęcia dań i wnętrza',
+        'Szybkość na mobile pod ruch z ulicy',
+      ],
+      role: 'Struktura, design, development',
+    },
+    'eleon-clinic': {
+      summary:
+        'Klinika medycyny estetycznej w Warszawie: nie wizytówka, a działający system rezerwacji z grafikiem lekarzy.',
+      details: [
+        'Własny silnik rezerwacji — bez zewnętrznych usług',
+        'Dostępność lekarzy i terminów na żywo',
+        'Panel admina: usługi, lekarze, zgłoszenia',
+        'Karty procedur z cenami i przygotowaniem',
+        'Potwierdzenia i powiadomienia o zgłoszeniu',
+      ],
+      role: 'Scenariusze UX, design, front i logika rezerwacji',
+    },
+    brozone: {
+      summary:
+        'Barber shop w Szczecinie: cel — klient rezerwuje sam, w czterech krokach, bez wymiany wiadomości.',
+      details: [
+        'Rezerwacja w 4 krokach: usługa → barber → termin → potwierdzenie',
+        'Program lojalnościowy liczący wizyty',
+        'Panel BROZONE OS do zmian i terminów',
+        'Profile barberów i ich wolne godziny',
+        'Wielojęzyczność pod miasto',
+      ],
+      role: 'Produkt, design, development, panel admina',
+    },
+    'your-flowers': {
+      summary:
+        'Kwiaciarnia w Szczecinie: dostawa tego samego dnia to cały biznes, więc interfejs stoi na deadlinie.',
+      details: [
+        'Dobór bukietu pod okazję, datę i budżet',
+        'Deadline dostawy „dziś” z odliczaniem',
+        'Kreator zamówienia z kartką i oknem czasowym',
+        'Katalog z kategoriami i dostępnością',
+        'Zamówienie bez zbędnych kroków',
+      ],
+      role: 'UX, design, development, logika e-commerce',
+    },
+    krasnovska: {
+      summary:
+        'Strona marki osobistej: zadaniem było, by ekspert wyglądał premium i zbiorczo, bez szumu.',
+      details: [
+        'Spokojna, premium typografia',
+        'Portfolio prac i historia studia',
+        'Blok usług z jasnymi formatami',
+        'Trzy języki z zapamiętanym wyborem',
+        'Zdjęcia na pierwszym planie, dużo powietrza',
+      ],
+      role: 'Design, kod, i18n',
+    },
+    technokomis: {
+      summary:
+        'Bot Telegram przyjmujący elektronikę w komis: zgłoszenie, wycena i powiadomienia — bez własnego serwera.',
+      details: [
+        'Całe zgłoszenie dzieje się w Telegramie',
+        'Wyliczenie komisji i ceny wstępnej',
+        'Powiadomienie właściciela o każdym zgłoszeniu',
+        'Webhook serverless — płacisz za zapytania',
+        'Stan dialogu utrzymany bez utraty kontekstu',
+      ],
+      role: 'Logika bota, integracja, wdrożenie',
+    },
+    sushi: {
+      summary:
+        'Dostawa sushi w Szczecinie: zamówienie musi powstać w kilka minut na telefonie, jedną ręką.',
+      details: [
+        'Menu i koszyk z natychmiastowym dodawaniem',
+        'Kody rabatowe i wyliczanie dostawy',
+        'Klub lojalnościowy z bonusami za zamówienia',
+        'Checkout z minimalną liczbą pól',
+        'Układ pod zamawianie jedną ręką',
+      ],
+      role: 'Design, front, koszyk i checkout',
+    },
+  },
+};
+
+export function getDossier(locale: Locale, slug: string): Dossier | undefined {
+  if (locale === 'ru') return baseDossiers[slug];
+  return dossiersText[locale][slug] ?? baseDossiers[slug];
 }
 
 /* ------------------------------------------------------------------ */

@@ -24,7 +24,7 @@ export function Advantages() {
               key={a.title}
               className="group flex flex-col bg-ink-950 p-4 transition-colors duration-500 hover:bg-ink-900 sm:p-6"
             >
-              <div className="mb-3 grid h-9 w-9 place-items-center rounded-lg border border-white/10 text-silver transition-colors duration-500 group-hover:border-gold/40 group-hover:text-gold-soft sm:mb-4 sm:h-10 sm:w-10">
+              <div className="mb-3 grid h-9 w-9 place-items-center rounded-lg border border-white/10 text-silver transition-colors duration-500 group-hover:border-neon/40 group-hover:text-neon-soft sm:mb-4 sm:h-10 sm:w-10">
                 <Icon name={a.icon} className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
               </div>
               <h3 className="text-[13px] font-semibold text-platinum sm:text-sm">{a.title}</h3>

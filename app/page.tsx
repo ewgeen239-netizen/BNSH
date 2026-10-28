@@ -1,6 +1,7 @@
 import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
 import { SelectedWorks } from '@/components/SelectedWorks';
+import { WorkDossier } from '@/components/WorkDossier';
 import { WhatIDo } from '@/components/WhatIDo';
 import { About } from '@/components/About';
 import { Pricing } from '@/components/Pricing';
@@ -16,6 +17,7 @@ export default function HomePage() {
       <main id="main">
         <Hero />
         <SelectedWorks />
+        <WorkDossier />
         <WhatIDo />
         <About />
         <Pricing />

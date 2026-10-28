@@ -4,8 +4,9 @@ import { cn } from '@/lib/utils';
 
 export function Overline({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-overline text-gold-soft/80">
-      <span className="h-px w-6 bg-gold/40" aria-hidden="true" />
+    <span className="inline-flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-hud text-neon-soft/80">
+      <span className="h-1 w-1 bg-neon animate-pulse-dot" aria-hidden="true" />
+      <span className="h-px w-5 bg-neon/40" aria-hidden="true" />
       {children}
     </span>
   );
@@ -36,11 +37,13 @@ export function SectionHeading({
         <Overline>{overline}</Overline>
       </Reveal>
       <Reveal delay={0.05}>
-        <h2 className="mt-5 text-display-md font-semibold text-platinum">{title}</h2>
+        <h2 className="mt-5 font-display text-display-md font-bold tracking-tightest text-platinum">
+          {title}
+        </h2>
       </Reveal>
       {intro && (
         <Reveal delay={0.1}>
-          <p className="mt-5 text-base leading-relaxed text-silver/80 sm:text-lg">{intro}</p>
+          <p className="mt-5 text-sm leading-relaxed text-silver/75 sm:text-base">{intro}</p>
         </Reveal>
       )}
     </div>

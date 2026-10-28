@@ -18,7 +18,7 @@ export function About() {
               <Overline>About</Overline>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="mt-5 text-display-md font-semibold text-platinum">
+              <h2 className="mt-5 font-display text-display-md font-bold tracking-tightest text-platinum">
                 {t.about.title}
               </h2>
             </Reveal>
@@ -33,10 +33,10 @@ export function About() {
             <Reveal delay={0.15}>
               <button
                 onClick={() => scrollToId('pricing')}
-                className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-platinum focus-ring rounded-full"
+                className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-platinum focus-ring"
               >
                 {t.about.cta}
-                <ArrowRight className="h-4 w-4 text-gold-soft transition-transform group-hover:translate-x-0.5" strokeWidth={1.75} />
+                <ArrowRight className="h-4 w-4 text-neon-soft transition-transform group-hover:translate-x-0.5" strokeWidth={1.75} />
               </button>
             </Reveal>
           </div>
@@ -44,15 +44,15 @@ export function About() {
           {/* Signature card */}
           <div className="lg:col-span-5">
             <Reveal delay={0.1}>
-              <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6 shadow-glass sm:p-8">
-                <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(198,161,91,0.18),transparent_60%)] blur-2xl" />
-                <span className="block font-sans text-7xl font-extrabold leading-none tracking-tight text-gradient-gold sm:text-8xl">
+              <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6 shadow-panel sm:p-8">
+                <div className="absolute -right-16 -top-16 h-40 w-40 bg-[radial-gradient(circle,rgba(40,224,240,0.16),transparent_60%)] blur-2xl" />
+                <span className="block font-sans text-7xl font-extrabold leading-none tracking-tight text-gradient-neon sm:text-8xl">
                   BNSH
                 </span>
                 <span className="mt-3 block text-[11px] font-medium uppercase tracking-[0.34em] text-silver/70">
                   Personal Brand
                 </span>
-                <span className="mt-2 block text-[10px] uppercase tracking-[0.28em] text-gold-soft/60">
+                <span className="mt-2 block text-[10px] uppercase tracking-[0.28em] text-neon-soft/60">
                   Digital · Growth · Identity
                 </span>
 

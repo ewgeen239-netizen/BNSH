@@ -200,7 +200,7 @@ export function RoleCarousel<T>({
         <button
           onClick={() => navigate('prev')}
           aria-label={`${label} — prev`}
-          className="grid h-12 w-12 place-items-center rounded-full border-2 border-white/20 bg-transparent text-platinum transition-[transform,background-color,border-color] duration-150 hover:scale-[1.08] hover:border-gold/40 hover:bg-white/[0.12] focus-ring sm:h-16 sm:w-16"
+          className="grid h-12 w-12 place-items-center border-2 border-white/20 bg-transparent text-platinum transition-[transform,background-color,border-color] duration-150 hover:scale-[1.08] hover:border-neon/40 hover:bg-white/[0.12] focus-ring sm:h-16 sm:w-16"
         >
           <ArrowLeft className="h-[22px] w-[22px] sm:h-[26px] sm:w-[26px]" strokeWidth={2.25} />
         </button>
@@ -221,7 +221,7 @@ export function RoleCarousel<T>({
                 aria-label={`${label} ${i + 1}`}
                 className={cn(
                   'h-1.5 rounded-full transition-all duration-300 focus-ring',
-                  i === current ? 'w-6 bg-gold-soft' : 'w-1.5 bg-white/20 hover:bg-white/40',
+                  i === current ? 'w-6 bg-neon-soft' : 'w-1.5 bg-white/20 hover:bg-white/40',
                 )}
               />
             ))}
@@ -231,7 +231,7 @@ export function RoleCarousel<T>({
         <button
           onClick={() => navigate('next')}
           aria-label={`${label} — next`}
-          className="grid h-12 w-12 place-items-center rounded-full border-2 border-white/20 bg-transparent text-platinum transition-[transform,background-color,border-color] duration-150 hover:scale-[1.08] hover:border-gold/40 hover:bg-white/[0.12] focus-ring sm:h-16 sm:w-16"
+          className="grid h-12 w-12 place-items-center border-2 border-white/20 bg-transparent text-platinum transition-[transform,background-color,border-color] duration-150 hover:scale-[1.08] hover:border-neon/40 hover:bg-white/[0.12] focus-ring sm:h-16 sm:w-16"
         >
           <ArrowRight className="h-[22px] w-[22px] sm:h-[26px] sm:w-[26px]" strokeWidth={2.25} />
         </button>

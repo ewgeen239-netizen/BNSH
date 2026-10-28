@@ -14,7 +14,7 @@ export function ProcessStep({ step, last }: { step: Step; last?: boolean }) {
         />
       )}
 
-      <div className="relative grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/12 bg-ink-900 text-[13px] font-semibold text-gold-soft">
+      <div className="relative grid h-10 w-10 shrink-0 place-items-center border border-white/12 bg-ink-900 text-[13px] font-semibold text-neon-soft">
         {step.n}
       </div>
 

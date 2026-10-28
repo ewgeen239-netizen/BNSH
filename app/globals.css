@@ -5,6 +5,8 @@
 @layer base {
   :root {
     color-scheme: dark;
+    /* HUD chrome thickness — the fixed frame reserves this much on each edge */
+    --hud: 14px;
   }
 
   * {
@@ -31,71 +33,135 @@
 
   body {
     @apply bg-ink-950 text-silver antialiased;
-    font-feature-settings: 'ss01', 'cv01';
+    font-feature-settings: 'ss01', 'cv01', 'tnum';
     text-rendering: optimizeLegibility;
   }
 
+  /* While the boot sequence runs the page underneath must not scroll. */
+  body[data-booting='1'] {
+    overflow: hidden;
+  }
+
   ::selection {
-    background: rgba(198, 161, 91, 0.25);
+    background: rgba(40, 224, 240, 0.28);
     color: #fff;
   }
 
-  /* Custom scrollbar */
+  /* Machined scrollbar */
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: #050505;
+    background: #04060a;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1c1c1c;
-    border-radius: 999px;
-    border: 2px solid #050505;
+    background: #1c2430;
+    border: 2px solid #04060a;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #2a2a2a;
+    background: rgba(40, 224, 240, 0.45);
   }
 }
 
 @layer components {
   /* Consistent, visible keyboard focus for accessibility */
   .focus-ring {
-    @apply outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-neon/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
   }
 
-  /* Platinum metallic text gradient for headings */
+  /* Cold chrome text for headings */
   .text-gradient-platinum {
-    background: linear-gradient(180deg, #ffffff 0%, #cfd0d4 45%, #8a8b92 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #cfdee6 42%, #74848f 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
 
-  .text-gradient-gold {
-    background: linear-gradient(180deg, #e6d3a3 0%, #c6a15b 60%, #9b7b3f 100%);
+  .text-gradient-neon {
+    background: linear-gradient(180deg, #a8f6fd 0%, #28e0f0 55%, #0c8a99 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
 
-  /* Frosted glass surface */
-  .glass {
-    @apply border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl;
+  /* Flat machined surface — replaces the old frosted glass */
+  .panel {
+    @apply border border-white/[0.07] bg-ink-900/70 backdrop-blur-sm;
+  }
+
+  /* Monospaced HUD caption used all over the interface */
+  .hud {
+    @apply font-mono text-[10px] uppercase tracking-hud text-faint;
+  }
+
+  /* Four machined corner brackets on a positioned parent */
+  .brackets::before,
+  .brackets::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: inherit;
+    pointer-events: none;
+  }
+  .brackets::before {
+    top: -1px;
+    left: -1px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+  .brackets::after {
+    right: -1px;
+    bottom: -1px;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
   }
 }
 
 @layer utilities {
-  /* Classic serif look (MS Serif with graceful web fallbacks) */
-  .font-msserif {
-    font-family: 'MS Serif', 'Times New Roman', Georgia, serif;
+  /* CRT scanlines — overlay on any surface */
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.055) 0 1px,
+      transparent 1px 3px
+    );
   }
 
   /* Fine film grain — inline SVG noise, no network request */
   .grain {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 160px 160px;
+  }
+
+  /* Chromatic split on hover — the cheapest convincing glitch */
+  .glitch-text {
+    text-shadow: none;
+    transition: text-shadow 180ms linear;
+  }
+  .glitch-text:hover,
+  .glitch-text[data-glitch='1'] {
+    text-shadow:
+      -1.5px 0 0 rgba(255, 61, 138, 0.75),
+      1.5px 0 0 rgba(40, 224, 240, 0.75);
+  }
+
+  /* Clipped corner — a notched panel, reads as machined plating */
+  .notch {
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .notch-sm {
+    clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 0 100%);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }

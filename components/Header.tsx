@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { navLinks, siteConfig } from '@/lib/site';
@@ -10,6 +11,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 
 export function Header() {
   const t = useT();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -30,6 +32,11 @@ export function Header() {
 
   const go = (id: string) => {
     setOpen(false);
+    // The nav is in-page, so off the home page it has to go there first.
+    if (pathname !== '/') {
+      window.location.href = `/#${id}`;
+      return;
+    }
     // Wait a frame so the menu closes before scrolling.
     requestAnimationFrame(() => scrollToId(id));
   };
@@ -46,10 +53,10 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-content items-center justify-between px-5 sm:px-8">
         <button
           onClick={() => go('hero')}
-          className="group flex items-center gap-2.5 rounded-full focus-ring"
+          className="group flex items-center gap-2.5 focus-ring"
           aria-label={`BNSH Studio — ${t.common.toTop}`}
         >
-          <span className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.03] text-[13px] font-semibold tracking-tight text-platinum transition group-hover:border-gold/40">
+          <span className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.03] text-[13px] font-semibold tracking-tight text-platinum transition group-hover:border-neon/40">
             B
           </span>
           <span className="text-sm font-semibold tracking-tight text-platinum">
@@ -62,7 +69,7 @@ export function Header() {
             <button
               key={l.id}
               onClick={() => go(l.id)}
-              className="rounded-full px-3.5 py-2 text-sm text-silver/80 transition-colors hover:text-platinum focus-ring"
+              className="px-3.5 py-2 text-sm text-silver/80 transition-colors hover:text-platinum focus-ring"
             >
               {t.nav[l.id]}
             </button>
@@ -74,7 +81,7 @@ export function Header() {
 
           <button
             onClick={() => go('contact')}
-            className="hidden items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-platinum transition hover:border-gold/40 hover:bg-white/[0.06] focus-ring lg:inline-flex"
+            className="hidden items-center gap-1.5 border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-platinum transition hover:border-neon/40 hover:bg-white/[0.06] focus-ring lg:inline-flex"
           >
             {t.common.discuss}
             <ArrowUpRight className="h-4 w-4" strokeWidth={1.75} />
@@ -82,7 +89,7 @@ export function Header() {
 
           <button
             onClick={() => setOpen((v) => !v)}
-            className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-platinum focus-ring md:hidden"
+            className="grid h-10 w-10 place-items-center border border-white/10 text-platinum focus-ring md:hidden"
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >

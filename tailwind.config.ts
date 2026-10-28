@@ -1,5 +1,14 @@
 import type { Config } from 'tailwindcss';
 
+/**
+ * BNSH // 3089 — minimal cyberpunk design system.
+ *
+ * The palette is deliberately almost monochrome: a blue-black void, cold
+ * chrome neutrals and exactly one live colour (neon cyan) with a second,
+ * rarely used alarm colour (flux magenta). Minimalism here means restraint in
+ * hue, not in detail — the "future" reads through hairlines, mono telemetry
+ * and scan artefacts rather than through gradients everywhere.
+ */
 const config: Config = {
   darkMode: 'class',
   content: [
@@ -10,25 +19,30 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Deep ink backgrounds
+        // The void — blue-shifted blacks
         ink: {
-          950: '#050505',
-          900: '#080808',
-          850: '#0B0B0B',
-          800: '#101010',
-          700: '#161616',
-          600: '#1C1C1C',
+          950: '#04060A',
+          900: '#070A10',
+          850: '#0A0E15',
+          800: '#0E131C',
+          700: '#141A24',
+          600: '#1C2430',
         },
-        // Premium neutrals
-        platinum: '#E7E7E9',
-        silver: '#B9BAC0',
-        muted: '#8A8B92',
-        faint: '#5B5C63',
-        // Very restrained accents
-        gold: {
-          DEFAULT: '#C6A15B',
-          soft: '#D8BC86',
-          deep: '#9B7B3F',
+        // Cold chrome neutrals
+        platinum: '#E6F1F5',
+        silver: '#A6B6C2',
+        muted: '#74848F',
+        faint: '#4A5762',
+        // The one live colour
+        neon: {
+          DEFAULT: '#28E0F0',
+          soft: '#7FF0FA',
+          deep: '#0C8A99',
+        },
+        // Alarm / secondary signal — used sparingly
+        flux: {
+          DEFAULT: '#FF3D8A',
+          soft: '#FF86B4',
         },
         electric: {
           DEFAULT: '#5B8DEF',
@@ -37,54 +51,79 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-display)', 'Georgia', 'serif'],
+        display: ['var(--font-display)', 'var(--font-sans)', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       fontSize: {
-        'display-xl': ['clamp(3rem, 9vw, 7.5rem)', { lineHeight: '0.95', letterSpacing: '-0.03em' }],
-        'display-lg': ['clamp(2.5rem, 6vw, 4.5rem)', { lineHeight: '1.0', letterSpacing: '-0.025em' }],
-        'display-md': ['clamp(2rem, 4.5vw, 3.25rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        'display-xl': ['clamp(3rem, 9vw, 7.5rem)', { lineHeight: '0.92', letterSpacing: '-0.04em' }],
+        'display-lg': ['clamp(2.5rem, 6vw, 4.5rem)', { lineHeight: '0.98', letterSpacing: '-0.035em' }],
+        'display-md': ['clamp(1.9rem, 4.5vw, 3.1rem)', { lineHeight: '1.04', letterSpacing: '-0.03em' }],
       },
       letterSpacing: {
-        tightest: '-0.04em',
-        overline: '0.28em',
+        tightest: '-0.05em',
+        overline: '0.3em',
+        hud: '0.22em',
       },
       maxWidth: {
-        content: '1200px',
+        content: '1280px',
         prose: '68ch',
       },
       borderRadius: {
-        '2xl': '1.25rem',
-        '3xl': '1.75rem',
+        // 3089 hardware is machined, not rounded — radii stay tight on purpose
+        DEFAULT: '2px',
+        md: '3px',
+        lg: '4px',
+        xl: '6px',
+        '2xl': '8px',
+        '3xl': '12px',
       },
       boxShadow: {
-        glass: '0 1px 0 0 rgba(255,255,255,0.06) inset, 0 20px 60px -20px rgba(0,0,0,0.8)',
-        'glass-hover': '0 1px 0 0 rgba(255,255,255,0.10) inset, 0 30px 80px -24px rgba(0,0,0,0.9)',
-        gold: '0 0 0 1px rgba(198,161,91,0.25), 0 20px 60px -24px rgba(198,161,91,0.25)',
+        panel: '0 1px 0 0 rgba(255,255,255,0.05) inset, 0 30px 80px -30px rgba(0,0,0,0.95)',
+        neon: '0 0 0 1px rgba(40,224,240,0.35), 0 0 40px -10px rgba(40,224,240,0.45)',
+        'neon-soft': '0 0 24px -8px rgba(40,224,240,0.4)',
+        flux: '0 0 0 1px rgba(255,61,138,0.35), 0 0 40px -12px rgba(255,61,138,0.4)',
       },
       backgroundImage: {
         'grid-faint':
-          'linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px)',
+          'linear-gradient(to right, rgba(166,182,194,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(166,182,194,0.055) 1px, transparent 1px)',
+        'grid-neon':
+          'linear-gradient(to right, rgba(40,224,240,0.10) 1px, transparent 1px), linear-gradient(to bottom, rgba(40,224,240,0.10) 1px, transparent 1px)',
         'radial-fade':
-          'radial-gradient(60% 60% at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 70%)',
+          'radial-gradient(60% 60% at 50% 0%, rgba(40,224,240,0.08) 0%, transparent 70%)',
+        scanlines:
+          'repeating-linear-gradient(to bottom, rgba(255,255,255,0.045) 0 1px, transparent 1px 3px)',
       },
       transitionTimingFunction: {
         premium: 'cubic-bezier(0.22, 1, 0.36, 1)',
+        snap: 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
       keyframes: {
-        'aurora-1': {
-          '0%,100%': { transform: 'translate3d(-8%, -4%, 0) scale(1)' },
-          '50%': { transform: 'translate3d(6%, 6%, 0) scale(1.15)' },
-        },
-        'aurora-2': {
-          '0%,100%': { transform: 'translate3d(6%, 4%, 0) scale(1.1)' },
-          '50%': { transform: 'translate3d(-6%, -6%, 0) scale(0.95)' },
+        'scan-beam': {
+          '0%': { transform: 'translateY(-10%)', opacity: '0' },
+          '10%,90%': { opacity: '0.8' },
+          '100%': { transform: 'translateY(110vh)', opacity: '0' },
         },
         'fade-in': {
           from: { opacity: '0' },
           to: { opacity: '1' },
         },
-        shimmer: {
-          '100%': { transform: 'translateX(100%)' },
+        flicker: {
+          '0%,100%': { opacity: '1' },
+          '92%': { opacity: '1' },
+          '94%': { opacity: '0.72' },
+          '96%': { opacity: '1' },
+          '97%': { opacity: '0.85' },
+        },
+        'glitch-x': {
+          '0%,100%': { transform: 'translate3d(0,0,0)' },
+          '20%': { transform: 'translate3d(-2px,1px,0)' },
+          '40%': { transform: 'translate3d(2px,-1px,0)' },
+          '60%': { transform: 'translate3d(-1px,-1px,0)' },
+          '80%': { transform: 'translate3d(1px,1px,0)' },
+        },
+        'pulse-dot': {
+          '0%,100%': { opacity: '1', transform: 'scale(1)' },
+          '50%': { opacity: '0.35', transform: 'scale(0.82)' },
         },
         'spin-slow': {
           from: { transform: 'rotate(0deg)' },
@@ -94,23 +133,38 @@ const config: Config = {
           from: { transform: 'rotate(360deg)' },
           to: { transform: 'rotate(0deg)' },
         },
+        drift: {
+          '0%,100%': { transform: 'translate3d(-4%,-2%,0) scale(1)' },
+          '50%': { transform: 'translate3d(4%,3%,0) scale(1.08)' },
+        },
         float: {
           '0%,100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-14px)' },
+          '50%': { transform: 'translateY(-12px)' },
+        },
+        'grid-pan': {
+          from: { backgroundPosition: '0 0' },
+          to: { backgroundPosition: '0 64px' },
+        },
+        shimmer: {
+          '100%': { transform: 'translateX(100%)' },
         },
         'pulse-glow': {
-          '0%,100%': { opacity: '0.35' },
+          '0%,100%': { opacity: '0.3' },
           '50%': { opacity: '0.6' },
         },
       },
       animation: {
-        'aurora-1': 'aurora-1 22s ease-in-out infinite',
-        'aurora-2': 'aurora-2 28s ease-in-out infinite',
+        'scan-beam': 'scan-beam 7s linear infinite',
         'fade-in': 'fade-in 0.8s var(--tw-ease, ease) both',
-        shimmer: 'shimmer 2s infinite',
+        flicker: 'flicker 6s steps(1, end) infinite',
+        'glitch-x': 'glitch-x 0.4s steps(2, end) infinite',
+        'pulse-dot': 'pulse-dot 1.8s ease-in-out infinite',
         'spin-slow': 'spin-slow 60s linear infinite',
         'spin-reverse': 'spin-reverse 90s linear infinite',
+        drift: 'drift 26s ease-in-out infinite',
         float: 'float 7s ease-in-out infinite',
+        'grid-pan': 'grid-pan 8s linear infinite',
+        shimmer: 'shimmer 2s infinite',
         'pulse-glow': 'pulse-glow 6s ease-in-out infinite',
       },
     },

@@ -43,7 +43,7 @@ export function Contact() {
               <Overline>Contact</Overline>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="mt-5 text-display-md font-semibold text-platinum">
+              <h2 className="mt-5 font-display text-display-md font-bold tracking-tightest text-platinum">
                 {t.contact.title}
               </h2>
             </Reveal>
@@ -61,10 +61,10 @@ export function Contact() {
                     href={c.href}
                     target={c.href.startsWith('http') ? '_blank' : undefined}
                     rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="group flex items-center justify-between rounded-2xl border border-white/[0.08] bg-white/[0.02] px-5 py-4 transition-all duration-300 hover:border-gold/30 hover:bg-white/[0.04] focus-ring"
+                    className="group flex items-center justify-between rounded-2xl border border-white/[0.08] bg-white/[0.02] px-5 py-4 transition-all duration-300 hover:border-neon/30 hover:bg-white/[0.04] focus-ring"
                   >
                     <span className="flex items-center gap-3.5">
-                      <span className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-silver transition-colors group-hover:border-gold/40 group-hover:text-gold-soft">
+                      <span className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-silver transition-colors group-hover:border-neon/40 group-hover:text-neon-soft">
                         <c.icon className="h-[18px] w-[18px]" strokeWidth={1.5} />
                       </span>
                       <span className="flex flex-col">
@@ -73,7 +73,7 @@ export function Contact() {
                       </span>
                     </span>
                     <ArrowUpRight
-                      className="h-4 w-4 text-faint transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold-soft"
+                      className="h-4 w-4 text-faint transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-neon-soft"
                       strokeWidth={1.75}
                     />
                   </a>

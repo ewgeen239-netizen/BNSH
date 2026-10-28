@@ -12,7 +12,7 @@ type FieldErrors = { name?: string; contact?: string }; // values are error code
 
 const inputBase =
   'w-full rounded-xl border bg-white/[0.03] px-4 py-3 text-sm text-platinum placeholder:text-faint transition focus:bg-white/[0.05] focus:outline-none focus:ring-2';
-const inputOk = 'border-white/10 focus:border-gold/40 focus:ring-gold/20';
+const inputOk = 'border-white/10 focus:border-neon/40 focus:ring-neon/20';
 const inputBad = 'border-red-500/40 focus:border-red-500/50 focus:ring-red-500/20';
 
 export function ContactForm() {
@@ -100,14 +100,14 @@ export function ContactForm() {
         role="status"
         aria-live="polite"
       >
-        <span className="grid h-14 w-14 place-items-center rounded-full bg-gold/12 text-gold-soft">
+        <span className="grid h-14 w-14 place-items-center bg-neon/12 text-neon-soft">
           <CheckCircle2 className="h-7 w-7" strokeWidth={1.5} />
         </span>
         <h3 className="mt-5 text-xl font-semibold text-platinum">{f.successTitle}</h3>
         <p className="mt-2 max-w-sm text-sm text-silver/70">{f.successText}</p>
         <button
           onClick={() => setStatus('idle')}
-          className="mt-6 rounded-full border border-white/12 px-5 py-2.5 text-sm text-platinum transition hover:border-gold/40 focus-ring"
+          className="mt-6 border border-white/12 px-5 py-2.5 text-sm text-platinum transition hover:border-neon/40 focus-ring"
         >
           {f.successAgain}
         </button>
@@ -118,7 +118,7 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6 shadow-glass sm:p-8"
+      className="rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6 shadow-panel sm:p-8"
       noValidate
     >
       <div className="grid gap-4 sm:grid-cols-2">
@@ -225,7 +225,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-platinum px-6 py-3.5 text-sm font-semibold text-ink-950 transition hover:bg-white focus-ring disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+        className="group mt-6 inline-flex w-full items-center justify-center gap-2 bg-platinum px-6 py-3.5 text-sm font-semibold text-ink-950 transition hover:bg-white focus-ring disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
       >
         {status === 'loading' ? (
           <>
@@ -261,7 +261,7 @@ function Field({
   return (
     <div className="flex flex-col gap-1.5">
       <label htmlFor={id} className="text-xs font-medium text-silver">
-        {label} {required && <span className="text-gold-soft">*</span>}
+        {label} {required && <span className="text-neon-soft">*</span>}
       </label>
       {children}
       <AnimatePresence>
